@@ -1,0 +1,50 @@
+<app-header></app-header>
+
+<ion-content>
+  <form [formGroup]="registerForm" (ngSubmit)="onSubmitRegister()">
+    <ion-list>
+      <ion-item>
+        <ion-label position="stacked" color="primary">Username</ion-label>
+        <ion-input name="username" type="text" spellcheck="false" autocapitalize="off"
+        formControlName="email">
+        </ion-input>
+      </ion-item>
+
+      <!-- Error Messages -->
+      <ion-text color="danger" *ngIf="errorState(registerForm, 'email', 'email').message">
+        <p class="help-block ion-padding-start" [innerHTML]="errorState(registerForm, 'email', 'email').message"></p>
+      </ion-text>
+
+      <ion-item>
+        <ion-label position="stacked" color="primary">Password</ion-label>
+        <ion-input name="password" type="password" formControlName="password">
+        </ion-input>
+      </ion-item>
+
+      <!-- Error Messages -->
+      <ion-text color="danger" *ngIf="errorState(registerForm, 'password', 'password').message">
+        <p class="help-block ion-padding-start" [innerHTML]="errorState(registerForm, 'password', 'password').message"></p>
+      </ion-text>
+      
+      <ion-item>
+        <ion-label position="stacked" color="primary">Confirm Password</ion-label>
+        <ion-input name="confirmPassword" type="password" formControlName="confirmPassword">
+        </ion-input>
+      </ion-item>
+
+      <!-- Error Messages -->
+      <ion-text color="danger" *ngIf="errorState(registerForm, 'confirmPassword', 'confirmPassword').message">
+        <p class="help-block ion-padding-start" [innerHTML]="errorState(registerForm, 'confirmPassword', 'confirmPassword').message"></p>
+      </ion-text>
+    </ion-list>
+
+    <ion-row>
+      <ion-col>
+        <ion-button type="button" [routerLink]="['/login']" color="light" expand="block">Login</ion-button>
+      </ion-col>
+      <ion-col>
+        <ion-button type="submit" expand="block">Register</ion-button>
+      </ion-col>
+    </ion-row>
+  </form>
+</ion-content>
