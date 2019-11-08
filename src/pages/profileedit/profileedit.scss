@@ -1,0 +1,75 @@
+page-profileedit {
+    ion-content {
+        background: #e0e0e0 !important;
+     }
+     .form-body {
+         background: #fff;
+     }
+
+     .form-body {
+
+        width: 96%;
+        margin: 16px auto;
+        border-radius: 5px;
+        min-height: 550px;
+    }
+    ion-select {
+        min-width:100%;
+        text-align: left;
+    }
+    .form-body h3 {
+        text-align:center;
+    }
+    ion-select {
+        border:1px solid #ccc;
+    }
+    ion-input {
+        border:1px solid #ccc;
+    }
+
+   .form-body h3 {
+        text-align: left;
+        padding: 16px 8px 0px 8px;
+        margin-top: 0px !important;
+        font-size: 19px;
+    }
+    .entry-bottom {
+        width: 100%;
+        margin: 0 auto;
+    }
+    .cancel-btn{ width: 100%;
+     }
+
+     .ion-md-close-circle:before {
+        content: "\f2bf";
+        float: right;
+        font-size: 24px;
+        color: #ff0000;
+        margin: 10px;
+    }
+
+    ion-datetime {
+        border: 1px solid #ccc;
+    }
+
+    .ion-md-arrow-back:before {
+        color:#fff !important;
+    }
+
+    .item-md {
+        padding-left:0px;
+    }
+
+    .item-md.item-block .item-inner {
+        padding-right:0px;
+    }
+
+    ion-datetime {
+        text-align:left;
+    }
+
+    /* webkit solution */
+// ::-webkit-input-placeholder { text-align:center; }
+// /* mozilla solution */
+// ion-datetime:-moz-placeholder { text-align:center; }
+}

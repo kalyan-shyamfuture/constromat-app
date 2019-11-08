@@ -1,0 +1,324 @@
+// http://ionicframework.com/docs/theming/
+// App Global Sass
+// --------------------------------------------------
+// Put style rules here that you want to apply globally. These
+// styles are for the entire app and not just one component.
+// Additionally, this file can be also used as an entry point
+// to import other Sass files to be included in the output CSS.
+//
+// Shared Sass variables, which can be used to adjust Ionic's
+// default Sass variables, belong in "theme/variables.scss".
+//
+// To declare rules for a specific mode, create a child rule
+// for the .md, .ios, or .wp mode classes. The mode class is
+// automatically applied to the <body> element in the app.
+// CSS for Home page  start
+
+
+// .loginpage-content {
+//     background-image: url('../assets/imgs/background-logo.png');
+//     background-repeat: no-repeat;
+//     background-size: cover;
+//     text-align: center;
+//     background-position: center;
+// }
+
+// ion-menu {
+//     .menu-inner {
+//         width:90%;
+//     }
+//     z-index:99;
+// }
+
+
+.arrow-forward {
+    float: right;
+    font-size: 22px;
+    font-weight: bold;
+    margin-top: -1px;
+
+    .ion-md-arrow-forward:before {
+        content: "\f287";
+        font-size: 41px;
+        margin-right: 26px;
+    }
+}
+
+
+ion-content>.scroll-content {
+    // margin-top: 150px;
+}
+
+// .scroll-content .item.item-md .checkbox-md {
+//     margin: 7px;
+// }
+
+// .scroll-content .list-md .list-md {
+//     border-radius: 15px;
+//     background: #fff;
+// }
+
+// .scroll-content .list-md .list-md .item-md {
+//     background: none !important;
+//     height: 8px;
+// }
+
+// .scroll-content .list-md .list-md .item-md .typetitle {
+//     font-size: 14px;
+//     color: #717171;
+// }
+
+// .scroll-content .item-md .label-md {
+//     margin: 0;
+// }
+
+// .scroll-content .list-md h3 {
+//     font-size: 16px;
+//     color: #fa3b3c;
+// }
+
+// .back-button {
+// }
+
+// .ion-md-arrow-round-back:before {
+//     content: "\f288";
+//     font-size: 30px;
+// }
+
+// .basket-img img {
+//     height:20px;
+//     width:20px;
+// }
+// ion-input {
+//     ::placeholder {
+//         color: #c1bcbb !important;
+//     }
+// }
+
+
+
+
+
+// .menu-nav ion-item:nth-child(1) {
+//     background: #ffbb20 !important;
+//     h2 {
+//         color:#fff;
+//         font-size:20px;
+//         font-weight: bold;
+//     }
+//     p {
+//         color:#fff;
+//     }
+
+
+// }
+
+
+
+
+// / css end by kalyan /
+
+// Css for Constromat   Start 
+
+ion-content {
+    background-color: #fcfcfc !important;
+}
+
+ion-header {
+    .segment-md-primary .segment-button {
+        color: #fff;
+    }
+}
+
+ion-header {
+    div.toolbar-background {
+        // background-image: url('../assets/imgs/header.png');
+        // background-repeat: no-repeat;
+        // background-size: cover;
+        background: #9D1212;
+        text-align: center;
+    }
+
+    ion-icon {
+        color: #ffffff;
+    }
+
+    .toolbar-title-md {
+        color: #fff;
+    }
+}
+
+ion-footer {
+    background: #ffffff;
+    border-top: #cccccc 1px solid;
+}
+
+ion-footer button ion-label {
+    margin: 1px !important;
+}
+
+ion-footer button i {
+    font-size: 22px !important;
+    padding-bottom: 5px;
+}
+
+ion-footer button {
+    padding: 1px !important;
+    width: 24%;
+    color: #787777;
+
+    ion-label {
+        color: #8f8d8d;
+    }
+}
+
+ion-footer button span {
+    font-size: 10px;
+}
+
+ion-footer span {
+    margin: -5px auto 6px !important;
+}
+
+ion-footer {
+    // ion-icon {
+    //     font-size: 22px;
+    //     text-align: center;
+    // }
+
+    // i {
+    //     font-size: 22px;
+    // }
+    img {
+        width: 25px;
+        height: 25px;
+    }
+
+    button {
+        padding: 1px;
+        background: transparent;
+    }
+
+    span {
+        text-align: center;
+        display: block;
+        margin: 0px auto 10px;
+    }
+
+    // .active {
+    //     color: #e3441e;
+    // }
+}
+
+// ion-footer .quantity button {
+//     width: 100%;
+// }
+
+.segment-button.segment-activated {
+    color: #fff !important;
+    border-color: #fff !important;
+}
+
+.banner-list {
+    height: 180px;
+    min-height: 180px;
+
+    img {
+       // height: 100%;
+        object-fit: cover;
+    }
+}
+
+.swiper-pagination-bullet-active {
+    background: #9D1212;
+}
+
+// Home page css 
+// .our-product {
+//     ion-label {
+//         h4 {
+//             font-weight: 700;
+//         }
+//         p {
+//             font-weight: 600;
+//             margin:0 0 10px;
+//         }
+//     }
+// }
+
+ion-label {
+    h4 {
+        font-weight: 700;
+    }
+
+    p {
+        font-weight: 600;
+        margin: 0 0 10px;
+    }
+}
+
+.box-img {
+    position: relative;
+    border-radius: 10px;
+    overflow: hidden;
+    height:180px;
+
+    img {
+        height: 100%;
+        object-fit: cover;
+    }
+
+    button {
+        position: absolute;
+        bottom: 0;
+        margin: 0;
+        border-radius: 0;
+
+        span {
+            font-size: 10px;
+        }
+    }
+}
+
+// .how-works {
+
+// }
+
+.heading-border-line {
+    align-items: center;
+    display: flex;
+
+    span {
+        border-top: 1px solid #000;
+        width: 100%;
+        display: block;
+    }
+}
+
+.how-works-box {
+    width: 90px;
+    height: 90px;
+    display: block;
+    margin: 0 auto;
+}
+
+.cat-img-full {
+    height: 150px;
+    min-height: 150px;
+    position: relative;
+}
+
+.cat-img-full img {
+    height: 150px;
+    min-height: 150px;
+    width:100%;
+    object-fit: cover;
+}
+
+.cat-title {
+    position: absolute;
+    top: 36%;
+    right: 15px;
+    font-size: 1.3em;
+    color: #000;
+}

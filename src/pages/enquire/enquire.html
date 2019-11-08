@@ -1,0 +1,31 @@
+<!-- <ion-header>
+    <ion-navbar>
+       <ion-title>Login</ion-title>
+    </ion-navbar>
+ </ion-header> -->
+
+ <ion-content class="has-header enquire-content">
+
+    <form [formGroup]="enquireForm" novalidate (submit)="signIn()">
+
+            <ion-grid class="form-body">
+                <ion-row>
+                    
+                    <ion-col col-12>
+                        <ion-input type="text" name="name" formControlName="name" [ngClass]="displayFieldCss('email_phone')" placeholder="Email"></ion-input>
+                        <span class="error-msg" *ngIf="isFieldValid('name')">Please enter a valid Name.</span>
+                    </ion-col>
+                    
+                    <ion-col col-12>
+                        <ion-input type="text" name="password" formControlName="password" [ngClass]="displayFieldCss('password')" placeholder="Password"></ion-input>
+                        <span class="error-msg" *ngIf="isFieldValid('password')">Please enter a Password.</span>
+                    </ion-col>
+                </ion-row>
+                <ion-row responsive-sm class="entry-bottom">
+                    <ion-col class="pl-0 pr-0">
+                        <button ion-button color="primary" block>Login</button>
+                    </ion-col>
+                </ion-row>
+            </ion-grid>
+        </form>
+</ion-content>

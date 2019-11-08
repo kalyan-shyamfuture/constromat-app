@@ -1,0 +1,167 @@
+<!--
+  Generated template for the HomePage page.
+
+  See http://ionicframework.com/docs/components/#navigation for more info on
+  Ionic pages and navigation.
+-->
+<!-- <ion-header>
+
+    <ion-navbar>
+        <ion-title>Product Details</ion-title>
+    </ion-navbar>
+
+</ion-header> -->
+
+<ion-content class="product-details">
+    <div class="main-top" padding>
+
+        <ion-icon class="back-btn" item-start (click)="goBack()" ios="ios-arrow-round-back" md="md-arrow-round-back">
+        </ion-icon>
+        <!-- <ion-icon class="social-share" item-end ios="ios-share" md="md-share"></ion-icon> -->
+    </div>
+    <div class="main-body">
+    
+        <div class="single-img" *ngIf="proimgArr.length==0">
+            <img src="{{baseimg+productDetails.image_large}}" />
+        </div>
+        <ion-slides pager *ngIf="proimgArr.length >0">
+            <ion-slide *ngFor="let proImg of proimgArr">
+                <img *ngIf="proImg" src="{{baseimg+proImg}}" />
+            </ion-slide>
+
+        </ion-slides>
+        <div padding>
+            <button class="discount-background" *ngIf="proMeta.price > proMeta.market_price"> {{proMeta.percentage}}% Off</button>
+            <ion-title >
+                <h3 text-wrap class="pname">{{productDetails.name}}</h3></ion-title>
+            <p class="pro-price">
+                <span class="regular-price" *ngIf="proMeta.price > proMeta.market_price">₹{{proMeta.price}} </span>
+                <span class="offer-price">₹{{proMeta.market_price}} </span>
+            </p>
+            <ion-list>Unit</ion-list>  
+            <button [ngClass]="meta.meta_id==proMeta.meta_id ? 'light2':'light'" ion-button color="light"
+                *ngFor="let meta of productDetails.meta; let i = index" (click)="changePrice(meta,i)">
+             
+                <span >{{meta.quantity_count}} {{meta.unit_name}}</span>
+            </button>
+        </div>
+
+
+
+        <div class="description">
+            <ion-list>
+                <ion-item text-wrap (click)="toggleGroup(1)" [ngClass]="{active: isGroupShown(1)}">
+                   
+                    <h3>
+                        Description
+                        <ion-icon class="icon2" color="success" item-right
+                            [name]="isGroupShown(1) ? 'ios-arrow-down' : 'ios-arrow-forward'"></ion-icon>
+                    </h3>
+                    <div *ngIf="isGroupShown(1)">
+                        <p>{{productDetails.description}}</p>
+                    </div>
+                </ion-item>
+            </ion-list>
+        </div>
+
+        <div class="delivery-type2">
+            <div class="home-delivery-type">
+                <ion-card>
+
+                    <ion-card-content *ngFor="let delivery of deliveryList">
+                        <div class="home-delivery-icon">
+                            <img src="{{baseimg+delivery.image}}" />
+                            <span>{{delivery.type}}: {{delivery.details}}</span>
+                        </div>
+                    </ion-card-content>
+                </ion-card>
+            </div>
+
+            <ion-grid class="pricing-details">
+                <ion-row>
+                    <ion-col col-12>
+                        <h2>Your Pricing Details</h2>
+                    </ion-col>
+                </ion-row>
+                <ion-row class="border-dotted">
+                    <ion-col col-8 class="text-left">Discount</ion-col>
+                    <ion-col col-4 class="text-right">₹{{discountPrice}}</ion-col>
+                </ion-row>
+                <ion-row class="border-dotted">
+                    <ion-col col-8 class="text-left">Amount Payable</ion-col>
+                    <ion-col col-4 class="text-right">₹{{proMeta.market_price}}</ion-col>
+                </ion-row>
+                <ion-row class="border-dotted">
+                    <ion-col col-4 class="text-left">Purchase For</ion-col>
+                    <ion-col col-8 class="text-right orange-color">{{user_name}}
+                    </ion-col>
+                </ion-row>
+            </ion-grid>
+            <ion-grid>
+                <ion-row>
+                    <ion-col col-12 class="text-left please-read">
+                        <img src="assets/imgs/please-read.png">
+                    </ion-col>
+                    <ion-col col-12 class="text-left cancel-icon" (click)="gotoCmsPage(2)">
+                        <i class="fa fa-circle" aria-hidden="true"></i> Cancellation Policy
+                    </ion-col>
+                </ion-row>
+                <ion-row>
+                    <ion-col col-6 *ngIf="!proMeta.isCart">
+                        <button class="cart-btn" ion-button (click)="addtoCart(productDetails,proMeta)">Add To Cart
+                            <ion-icon name="ios-arrow-forward">
+                            </ion-icon> </button>
+                    </ion-col>
+
+                    <ion-col col-6 *ngIf="proMeta.isCart">
+                        <div class="cart-quantity">
+                            <button class="quantity-btn" style="margin-left:10%;" type="button" name="button"
+                                (click)="decrement(productDetails,proMeta)">
+                                <ion-icon name="remove"></ion-icon>
+                            </button>
+                            <span style="width: 20px; text-align: center; display:inline-block;">
+                                {{proMeta.quantity}}
+                            </span>
+                            <button class="quantity-btn" type="button" name="button"
+                                (click)="increment(productDetails,proMeta)">
+                                <ion-icon name="add"></ion-icon>
+                            </button>
+                        </div>
+                    </ion-col>
+
+
+                    <ion-col col-6><button (click)="buyNow(productDetails,proMeta)" class="buynow-btn" ion-button>Buy
+                            Now <ion-icon name="ios-arrow-forward">
+                            </ion-icon> </button>
+                    </ion-col>
+
+                </ion-row>
+            </ion-grid>
+        </div>
+
+        <div class="arrival-list">
+            <ion-card-header class="similar-title"><b>Similar Product</b></ion-card-header>
+            <ion-card-content class="home-product">
+                <ion-slides fullscreen loop slidesPerView="3.2">
+                    <ion-slide *ngFor="let product of productList; let i = index">
+                        <ion-card class="box-similar" (click)="gotoDetails(product.id,product.category_id)">
+                            <div class="box-img">
+                            <img src="{{baseimg+product.image_large}}" class="slide-image" />
+                            </div>
+                            <ion-card-content class="sim-pro">
+                                <p class="pro-name">{{product.name}}</p>
+                            </ion-card-content>
+                        </ion-card>
+                    </ion-slide>
+                   
+                </ion-slides>
+            </ion-card-content>
+        </div>
+
+
+    </div>
+</ion-content>
+
+<ion-footer>
+    <page-footer></page-footer>
+</ion-footer>

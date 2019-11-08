@@ -1,0 +1,104 @@
+<!--
+   Generated template for the HomePage page.
+   
+   See http://ionicframework.com/docs/components/#navigation for more info on
+   Ionic pages and navigation.
+   -->
+   <ion-header>
+    <ion-navbar>
+       <ion-title></ion-title>
+    </ion-navbar>
+ </ion-header>
+ <ion-content class="productlist-page" >
+    <div class="productlist" >
+            <form [formGroup]="searchForm" novalidate (submit)="filterList()">
+            <ion-row >
+                  <ion-col col-12>
+                       
+                        <!-- <ion-searchbar placeholder="Search for product" [(ngModel)]="searchTxt" (ionChange)="filterSearchList($event)" formControlName="searchTxt" ></ion-searchbar> -->
+                        <ion-input class="srh-box"  type="text" [(ngModel)]="searchTxt" (ionChange)="filterSearchList($event)" formControlName="searchTxt" placeholder="Search Product">
+                              
+                        </ion-input>
+                        <ion-icon (click)="filterList()" class="srh-icon" name="search" item-right></ion-icon>
+                       
+                  </ion-col>
+               </ion-row>
+            </form>
+     
+       <ion-list *ngIf="searchList.length>0" class="search-list">
+            <ion-item *ngFor="let item of searchList" tappable (click)="selectSearchResult(item,searchKeyword)">
+              {{searchKeyword}} {{item.brand_name}}
+            </ion-item>
+          </ion-list>
+       <ion-grid class="productlist-section" *ngIf="visible_key">
+          <ion-card>
+             <ion-card-content>
+                <ion-row *ngIf="productList.length>0">
+                   <ion-col col-12>
+                      <ion-item-divider>Product List
+                      </ion-item-divider>
+                   </ion-col>
+                   <ion-col col-6 *ngFor="let product of productList; let i=index" >
+                      <ion-card class="custom-card-body">
+                         <div class="box-img" (click)="gotoDetails(product.id,product.category_id)"><img
+                            src="{{baseimg+product.image_large}}" class="slide-image" /></div>
+                         <ion-card-content class="pro-box-body-card">
+                            <div class="pro-box-body">
+                               <p>
+                                  <span class="regular-price" *ngIf="(+product.meta[0].price) > (+product.meta[0].market_price)">₹{{product.meta[0].price}} </span>
+                                  <span class="offer-price">₹{{product.meta[0].market_price}} </span>
+                               </p>
+                               <p class="pro-name" (click)="gotoDetails(product.id,product.category_id)">{{product.name | slice:0:35}} <span *ngIf="product.name.length >35">...</span> </p>
+                               <p class="pro-unit">{{product.meta[0].quantity_count}}
+                                  {{product.meta[0].unit_name}}
+                               </p>
+                            </div>
+                            <ion-row>
+                               <ion-col col-12 *ngIf="!product.meta[0].isCart">
+                                  <button ion-button color="light" class="add-button"
+                                     (click)="addtoCart(product,i)">
+                                  <span>Add</span>
+                                  </button>
+                                  <button class="add-icon" (click)="addtoCart(product,i)">
+                                     <ion-icon name="ios-add"></ion-icon>
+                                  </button>
+                               </ion-col>
+                               <ion-col col-12 *ngIf="product.meta[0].isCart">
+                                  <div class="cart-quantity">
+                                     <button class="quantity-btn" type="button" name="button"
+                                        (click)="decrement(product,i)">
+                                        <ion-icon name="remove"></ion-icon>
+                                     </button>
+                                     <span style="width: 20px; text-align: center; display:inline-block;">
+                                     {{product.meta[0].quantity}}</span>
+                                     <button class="quantity-btn" type="button" name="button"
+                                        (click)="increment(product,i)">
+                                        <ion-icon name="add"></ion-icon>
+                                     </button>
+                                  </div>
+                               </ion-col>
+                            </ion-row>
+                         </ion-card-content>
+                      </ion-card>
+                   </ion-col>
+                   <ion-infinite-scroll (ionInfinite)="doInfinite($event)" *ngIf="totalproCount > proCount">
+                     <ion-infinite-scroll-content loadingSpinner="bubbles" loadingText="Loading more data..."></ion-infinite-scroll-content>
+                   </ion-infinite-scroll>
+               </ion-row>
+                <ion-row *ngIf="productList.length==0">
+                     <ion-col col-12>
+                           <div class="no-records-sec">
+                                 <img src="assets/imgs/no-record.png"> 
+                                 <h5>No Products Found!!!</h5>
+                           </div>
+                          
+                      </ion-col>
+                   </ion-row>
+             </ion-card-content>
+          </ion-card>
+       </ion-grid>
+    </div>
+ </ion-content>
+ <ion-footer>
+    <page-footer></page-footer>
+ </ion-footer>

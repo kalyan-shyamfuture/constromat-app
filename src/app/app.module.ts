@@ -1,31 +1,34 @@
-import { NgModule } from '@angular/core';
-import { BrowserModule } from '@angular/platform-browser';
-import { RouteReuseStrategy } from '@angular/router';
+import { ErrorHandler, NgModule } from '@angular/core';
+import { IonicApp, IonicErrorHandler, IonicModule } from 'ionic-angular';
+import { MyApp } from './app.component';
+import { StatusBar } from '@ionic-native/status-bar';
+import { SplashScreen} from '@ionic-native/splash-screen';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+// core module
+import { CoreModule } from '../../src/core/core.module';
 
-import { IonicModule, IonicRouteStrategy } from '@ionic/angular';
-import { SplashScreen } from '@ionic-native/splash-screen/ngx';
-import { StatusBar } from '@ionic-native/status-bar/ngx';
+import { Device } from '@ionic-native/device';
 
-import { AppComponent } from './app.component';
-import { AppRoutingModule } from './app-routing.module';
 
-import { CoreModule } from './core/modules/core.module';
 @NgModule({
-  declarations: [AppComponent],
-  entryComponents: [],
+  declarations: [
+    MyApp,
+  ],
   imports: [
-    BrowserModule,
-    IonicModule.forRoot(),
-    AppRoutingModule,
     BrowserAnimationsModule,
-    CoreModule
+    CoreModule,
+    CoreModule.forRoot(),
+    IonicModule.forRoot(MyApp),
+  ],
+  bootstrap: [IonicApp],
+  entryComponents: [
+    MyApp,
   ],
   providers: [
     StatusBar,
     SplashScreen,
-    { provide: RouteReuseStrategy, useClass: IonicRouteStrategy }
-  ],
-  bootstrap: [AppComponent]
+    {provide: ErrorHandler, useClass: IonicErrorHandler},
+    Device,
+  ]
 })
 export class AppModule {}

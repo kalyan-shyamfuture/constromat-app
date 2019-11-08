@@ -1,7 +1,7 @@
 {
-  "name": "marine",
+  "name": "Martinon",
   "integrations": {
     "cordova": {}
   },
-  "type": "angular"
+  "type": "ionic-angular"
 }

@@ -1,253 +1,236 @@
-import { Component, OnDestroy, ViewChild, AfterViewInit } from '@angular/core';
-import { Router, NavigationEnd } from '@angular/router';
-import { trigger, state, style, transition, animate } from '@angular/animations';
+import { Component, ViewChild } from '@angular/core';
+import { Nav, Platform, Navbar, ToastController, ModalController, MenuController, Events, AlertController } from 'ionic-angular';
+import { StatusBar } from '@ionic-native/status-bar';
+import { SplashScreen } from '@ionic-native/splash-screen';
+import { Device } from '@ionic-native/device';
+import { environment } from '../core/global';
+import { ServicesProvider } from '../core/services/services';
 
-import { Events, MenuController, Platform, ToastController, IonRouterOutlet } from '@ionic/angular';
-import { SplashScreen } from '@ionic-native/splash-screen/ngx';
-import { StatusBar } from '@ionic-native/status-bar/ngx';
-
-import { Storage } from '@ionic/storage';
-import { AlertController } from '@ionic/angular';
-// RxJs
-import { Subject, Subscription } from 'rxjs';
-import { takeUntil } from 'rxjs/operators';
-// Services
-import { AuthService } from './core/services';
+declare var google: any;
 @Component({
-  selector: 'app-root',
-  templateUrl: 'app.component.html',
-  styleUrls: ['app.component.scss'],
-  animations: [
-    trigger('expandCollapse', [
-      state('open', style({
-        height: '*',
-        margin: '*',
-        padding: '*',
-        visibility: 'visible',
-        opacity: '1'
-      })),
-      state('close', style({
-        height: '0px',
-        margin: '0px',
-        padding: '0px',
-        visibility: 'hidden',
-        opacity: '0'
-      })),
-      transition('open <=> close', animate(200))
-    ])
-  ]
+  templateUrl: 'app.html'
 })
-export class AppComponent implements AfterViewInit, OnDestroy {
-  private onDestroyUnSubscribe = new Subject<void>();
-  @ViewChild(IonRouterOutlet, { static: false }) routerOutlet: IonRouterOutlet;
-  public loggedIn = true;
-  public appMenus = [
-    {
-      sectionName: 'ACCOUNT',
-      showAfterLogin: false,
-      sectionItems: [
-        {
-          title: 'Login',
-          url: '/login',
-          icon: 'log-in'
-        },
-        {
-          title: 'Register',
-          url: '/register',
-          icon: 'person-add'
-        },
-      ]
-    },
-    {
-      sectionName: 'MENUS',
-      showAfterLogin: true,
-      sectionItems: [
-        {
-          title: 'Home',
-          url: '/user-tab/home',
-          icon: 'home'
-        },
-        {
-          title: 'Product',
-          url: '/user-tab/product',
-          icon: 'notifications'
-        },
-        {
-          title: 'Menu',
-          url: '/user/menu',
-          icon: 'menu',
-          state: 'close',
-          subMenus: [
-            {
-              title: 'Sub Menu 1',
-              url: '/user/notification',
-              icon: 'notifications'
-            },
-            {
-              title: 'Sub Menu 2',
-              url: '/user/notification',
-              icon: 'notifications',
-              state: 'close',
-              subSubMenus: [
-                {
-                  title: 'Sub Sub Menu 1',
-                  url: '/user/notification',
-                  icon: 'notifications'
-                },
-                {
-                  title: 'Sub Sub Menu 2',
-                  url: '/user/notification',
-                  icon: 'notifications'
-                },
-              ]
-            },
-          ]
-        },
-        {
-          title: 'Profile',
-          url: '/user/profile',
-          icon: 'person'
-        }
-      ]
-    },
-    {
-      sectionName: 'ACCOUNT',
-      showAfterLogin: true,
-      sectionItems: [
-        {
-          title: 'Profile',
-          url: '/profile',
-          icon: 'person'
-        }
-      ]
-    },
-  ];
-  public dark = false;
-  public backSubscription: Subscription;
-  public userData: any;
+export class MyApp {
+  @ViewChild(Nav) nav: Nav;
+  @ViewChild(Navbar) navBar: Navbar;
+  rootPage: any;
+
+  pages: Array<{ title: string, component: any }>;
+  baseimg: any = environment.imageBaseUrl;
+  hideBackButton: Boolean = true;
+  totalCart: number;
+  logged_first_name: any;
+  logged_last_name: any;
+  logged_user_name: any;
+  logged_user_contact_no: any
+  logged_user_email: any;
+  isLoggedin: boolean;
+  isHeaderHidden: any;
+  fetchedAddress: any;
+  arrayCount: number;
+  pinCode: any;
+  logged_user_id: any;
+  deviceId: any;
+  deliveryList: any = [];
+  faqList: any = [];
+  customsegment:string="HomePage";
+
+  public onlineOffline: boolean = navigator.onLine;
   constructor(
-    private platform: Platform,
-    private splashScreen: SplashScreen,
-    private statusBar: StatusBar,
-    private storage: Storage,
-    private router: Router,
-    public alertController: AlertController,
-    public authService: AuthService,
+    public platform: Platform,
+    public statusBar: StatusBar,
+    public splashScreen: SplashScreen,
+    public events1: Events,
+    public modalCtrl: ModalController,
+    public toastCtrl: ToastController,
+    private device: Device,
+    public sp: ServicesProvider,
+    public menuCtrl: MenuController,
   ) {
-    this.initializeApp();
-    router.events.subscribe(val => {
-      if (val instanceof NavigationEnd) {
-        this.authService.isUserLoggedIn().then(userData => {
-          if (userData && Object.keys(userData).length) {
-            this.userData = userData;
-            this.userData.isLoggedIn = true;
-            this.loggedIn = true;
-            // return userDataGot;
-          } else {
-            this.userData = userData;
-            this.loggedIn = false;
-          }
-        });
-        // console.log(this.userData);
+    //this.initializeApp();
+    this.platform.ready().then(() => {
+      statusBar.styleLightContent();
+      statusBar.overlaysWebView(false);
+      statusBar.backgroundColorByHexString("#fcc527");
+      this.deviceId = localStorage.setItem('deviceId', this.device.uuid);
+      if (localStorage.getItem('isLoggedin')) {
+        this.nav.setRoot('HomePage');
+      }
+      else {
+        this.nav.setRoot('LoginPage');
+      }
+      this.statusBar.styleDefault();
+      this.splashScreen.hide();
+      this.navBar.backButtonClick = (e: UIEvent) => {
+
+        this.nav.pop();
+      }
+    //  this.getDeliverSlot();
+
+      if (!navigator.onLine) {
+        //Do task when no internet connection
+        this.nav.setRoot('NointernetPage');
       }
     });
-  }
 
-  ngAfterViewInit() {
-    this.backbuttonInitializer();
-  }
-
-  ionDidClose() {
-    this.appMenus.map(item => {
-      // this.closeAllCollapsibles(item);
+    this.events1.subscribe('hideBackButton', (data) => {
+      this.hideBackButton = data;
     });
-  }
 
-  // closeAllCollapsibles(item) {
-  //   if (condition) {
-  //     item['state'] = 'close';
-  //   } else {
-  //     item['state'] = 'close';
-  //   }
-  // }
-
-  ngOnDestroy() {
-    // UnSubscribe Subscriptions
-    this.onDestroyUnSubscribe.next();
-    this.onDestroyUnSubscribe.complete();
-    this.backSubscription.unsubscribe();
-  }
-
-  initializeApp() {
-    this.platform.ready().then(() => {
-      this.storage.get('darkMode').then(darkModeValue => {
-        this.dark = darkModeValue;
-        this.setStatusBarStyle();
-      });
-      this.splashScreen.hide();
+    this.events1.subscribe('isHeaderHidden', (data) => {
+      this.isHeaderHidden = data;
     });
+
+    // sp.getCartNumberStatus.subscribe(status => {
+    //   //this.cartNumberStatus(status)
+    // });
+    sp.getLoginStatus.subscribe(status => this.changeStatus(status));
+
   }
-  private setStatusBarStyle() {
-    if (this.dark) {
-      this.statusBar.styleLightContent();
-      this.statusBar.backgroundColorByHexString('#000000');
-    } else {
-      this.statusBar.styleDefault();
-      this.statusBar.backgroundColorByHexString('#ffffff');
+
+  menuClose() {
+    this.menuCtrl.close();
+  }
+
+  loadUserInfo() {
+    if (localStorage.getItem('isLoggedin')) {
+      this.isLoggedin = true;
+      this.logged_user_name = localStorage.getItem('logged_user_name');
+      this.logged_user_email = localStorage.getItem('logged_user_email');
+      this.logged_user_contact_no = localStorage.getItem('logged_user_contact_no');
+      this.logged_user_id = localStorage.getItem('logged_user_id');
+    }
+    else {
+      this.isLoggedin = false;
+      this.logged_user_name = "Guest";
+      this.logged_user_email = "";
+      this.logged_user_contact_no = "";
+      this.logged_user_id = "";
+    }
+    if (localStorage.getItem("cart")) {
+      this.totalCart = JSON.parse(localStorage.getItem("cart")).length;
+    }
+    else {
+      this.totalCart = 0;
     }
   }
 
-  private backbuttonInitializer() {
-    // this.platform.backButton
-    // .pipe(takeUntil(this.onDestroyUnSubscribe))
-    // .subscribe(() => {
-    this.backSubscription = this.platform.backButton
-    .subscribeWithPriority(0, () => {
-      if (this.router.url === '/login' || this.router.url === '/dashboard') {
-        this.presentAlertConfirm();
-      } else if (this.routerOutlet && this.routerOutlet.canGoBack()) {
-        this.routerOutlet.pop();
-      }  else {
-        this.presentAlertConfirm();
-      }
-    });
+  ionViewDidLoad() {
+    this.navBar.backButtonClick = (e: UIEvent) => {   /// add this event
+      this.nav.pop();
+    };
   }
-  async presentAlertConfirm() {
-    console.log('presentAlertConfirm');
-    const alert = await this.alertController.create({
-      header: 'Exit',
-      message: 'Do you want to exit the app?',
-      buttons: [
-        {
-          text: 'Cancel',
-          role: 'cancel',
-          cssClass: 'secondary',
-          handler: (blah) => {
-            console.log('Confirm Cancel: blah');
-          }
-        }, {
-          text: 'Exit',
-          handler: () => {
-            navigator['app'].exitApp();
-            console.log('Confirm Okay');
-          }
-        }
-      ]
-    });
 
-    await alert.present();
+  // cartNumberStatus(status: boolean) {
+  //   if (status) {
+  //     if (localStorage.getItem("cart")) {
+  //       this.totalCart = JSON.parse(localStorage.getItem("cart")).length;
+  //     }
+  //     else {
+  //       this.totalCart = 0;
+  //     }
+  //   }
+  // }
+
+  // updateLocation(status: boolean) {
+  //   if (status) {
+  //     this.pinCode = localStorage.getItem('newAddress');
+  //   }
+  //   else {
+
+  //   }
+  // }
+
+  openPage(page) {
+    this.nav.setRoot(page.component);
   }
-  toggleTheme() {
-    this.dark = !this.dark;
-    this.storage.set('darkMode', this.dark);
-    this.setStatusBarStyle();
+
+  gotoPage(routePage) {
+    this.nav.push(routePage);
   }
-  expandClose(event, navItem) {
-    navItem.state = (navItem.state === 'open') ? 'close' : 'open';
+
+  gotoCmsPage(id) {
+    this.nav.push('CmsPage', { id: id });
   }
-  logout() {
-    this.storage.remove('userData');
-    // this.routerOutlet.pop();
-    this.router.navigate(['/login']);
+
+  // gotoProductList(routePage) {
+  //   this.nav.push(routePage, { id: '' });
+  // }
+
+  private changeStatus(status: boolean) {
+    if (status) {
+      this.loadUserInfo();
+    }
   }
+
+  goBack() {
+      this.nav.pop();
+  }
+
+  // goBack() {
+  //   if (this.nav.getActive().name == 'OrderdetailsPage') {
+  //     this.nav.push('OrdersPage');
+  //   }
+  //   else {
+  //     this.nav.pop();
+  //   }
+  // }
+  // gotoSearchPage(routePage) {
+  //   this.nav.push('SearchPage', { keyword: 0 });
+  // }
+
+
+  // getAddress(latLng) {
+  //   let geocoder = new google.maps.Geocoder;
+  //   geocoder.geocode({ 'location': latLng }, (results, status) => {
+  //     this.fetchedAddress = results[0].address_components;
+  //     this.pinCode = this.fetchedAddress[0].long_name + ' ' + this.fetchedAddress[1].long_name + ' ' + this.fetchedAddress[2].long_name;
+  //     localStorage.setItem('newAddress', this.pinCode);
+  //   });
+  // }
+
+  // openModal() {
+  //   var data = { 'pinCode': this.pinCode };
+  //   this.nav.push('UpdatepinPage', data);
+  // }
+  // getDeliverSlot() {
+  //   this.sp.getDeliverSlot().subscribe(
+  //     res => {
+  //       this.deliveryList = res['result'];
+  //     },
+  //     error => {
+  //     }
+  //   )
+  // }
+
+  logOut() {
+    localStorage.clear();
+    this.isLoggedin = false;
+    this.logged_user_name = "Guest";
+    this.logged_user_email = "";
+    this.logged_user_contact_no = "";
+    this.logged_user_id = "";
+    this.nav.setRoot('LoginPage');
+  }
+
+
+  segmentChanged(event) {
+    console.log(event.value);
+    this.nav.setRoot(event.value);
+  }
+  
+
+  presentToast(msg) {
+    const toast = this.toastCtrl.create({
+      message: msg,
+      duration: 3000,
+      position: 'bottom'
+    });
+    toast.present();
+  }
+
+  // deliveryListt() {
+  //   return this.deliveryList.filter((delivery) => delivery.is_home == 1);
+  // }
+
 }

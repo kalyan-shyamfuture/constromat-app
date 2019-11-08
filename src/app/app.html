@@ -1,0 +1,111 @@
+<ion-header *ngIf="!isHeaderHidden">
+    <ion-navbar hideBackButton="{{hideBackButton}}">
+        <ion-buttons left>
+            <button ion-button menuToggle color="light" *ngIf="hideBackButton">
+                <ion-icon name="menu"></ion-icon>
+                <!-- <ion-title></ion-title> -->
+            </button>
+            <button ion-button color="light" *ngIf="!hideBackButton" (click)="goBack()">
+                <ion-icon ios="ios-arrow-round-back" md="md-arrow-round-back">
+                </ion-icon>
+            </button>
+        </ion-buttons>
+        <ion-title class="header-title">
+            Welcome to Constromat
+        </ion-title>
+        <ion-buttons right>
+            <button ion-button icon-only class="basket-img" (click)="gotoPage('AddorderPage')">
+                <ion-icon ios="ios-search" md="md-search"></ion-icon>
+            </button>
+        </ion-buttons>
+    </ion-navbar>
+    <ion-toolbar>
+        <ion-segment [(ngModel)]="customsegment" color="primary" (ionChange)="segmentChanged($event)">
+            <ion-segment-button value="HomePage">
+                Home
+            </ion-segment-button>
+            <ion-segment-button value="EnquirePage">
+                Enquire Now
+            </ion-segment-button>
+            <ion-segment-button value="LoginPage">
+                Login
+            </ion-segment-button>
+            <ion-segment-button value="ContactPage">
+                Contact
+            </ion-segment-button>
+        </ion-segment>
+    </ion-toolbar>
+</ion-header>
+
+
+<ion-menu [content]="mycontent" swipeEnabled="false">
+    <ion-content class="menu-nav">
+        <ion-item>
+            <ion-avatar item-start>
+                <!-- <img src="assets/imgs/man.jpg"> -->
+                <img src="assets/imgs/logo.png">
+            </ion-avatar>
+            <h2>{{logged_user_name}}
+
+                <span (click)="menuClose()" class="arrow-forward">
+                    <ion-icon ios="ios-arrow-forward" md="md-arrow-forward"></ion-icon>
+                </span>
+            </h2>
+            <p>Test User</p>
+
+            <!-- <p *ngIf="isLoggedin">+91 {{logged_user_contact_no}}
+
+            </p>
+            <p (click)="logOut()" *ngIf="isLoggedin">Logout</p>
+            <p (click)="gotoPage('LoginPage')" *ngIf="!isLoggedin">Login</p> -->
+        </ion-item>
+
+
+
+        <ion-card class="delivery-sidebar">
+            <ion-list>
+                <button class="orders-text" ion-item (click)="gotoPage('HomePage')">
+                    Home
+                </button>
+                <!-- <button class="orders-text" ion-item (click)="gotoPage('OrdersPage')" *ngIf="isLoggedin">
+                    My Orders
+                </button>
+                <button class="orders-text" ion-item (click)="gotoPage('LoginPage')" *ngIf="!isLoggedin">
+                    My Orders
+                </button>
+
+                <button class="orders-text" ion-item (click)="gotoPage('CategoryPage')">
+                    Categories
+                </button> -->
+            </ion-list>
+            <ion-list>
+                <button class="orders-text" ion-item (click)="gotoCmsPage(3)">
+                    About Us
+                </button>
+            </ion-list>
+            <ion-list>
+                <button class="orders-text" ion-item (click)="gotoCmsPage(4)">
+                    Terms & Conditions
+                </button>
+            </ion-list>
+
+            <ion-list>
+                <button class="orders-text" ion-item (click)="gotoCmsPage(9)">
+                    Privacy Policy
+                </button>
+            </ion-list>
+
+            <ion-list>
+                <button class="orders-text" ion-item (click)="gotoPage('FaqPage')">
+
+                    FAQ?
+                </button>
+            </ion-list>
+        </ion-card>
+        <ion-card class="delivery-sidebar">
+        </ion-card>
+    </ion-content>
+</ion-menu>
+<ion-content>
+    <ion-nav #mycontent [root]="rootPage" swipeBackEnabled="false"></ion-nav>
+</ion-content>
