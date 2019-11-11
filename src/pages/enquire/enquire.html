@@ -4,28 +4,77 @@
     </ion-navbar>
  </ion-header> -->
 
- <ion-content class="has-header enquire-content">
+<ion-content class="has-header enquire-content">
 
     <form [formGroup]="enquireForm" novalidate (submit)="signIn()">
 
-            <ion-grid class="form-body">
-                <ion-row>
-                    
-                    <ion-col col-12>
-                        <ion-input type="text" name="name" formControlName="name" [ngClass]="displayFieldCss('email_phone')" placeholder="Email"></ion-input>
-                        <span class="error-msg" *ngIf="isFieldValid('name')">Please enter a valid Name.</span>
-                    </ion-col>
-                    
-                    <ion-col col-12>
-                        <ion-input type="text" name="password" formControlName="password" [ngClass]="displayFieldCss('password')" placeholder="Password"></ion-input>
-                        <span class="error-msg" *ngIf="isFieldValid('password')">Please enter a Password.</span>
-                    </ion-col>
-                </ion-row>
-                <ion-row responsive-sm class="entry-bottom">
-                    <ion-col class="pl-0 pr-0">
-                        <button ion-button color="primary" block>Login</button>
-                    </ion-col>
-                </ion-row>
-            </ion-grid>
-        </form>
+        <ion-grid class="form-body">
+            <ion-row>
+
+                <ion-col col-12>
+                    <ion-input type="text" name="name" formControlName="name" [ngClass]="displayFieldCss('name')"
+                        placeholder="Name"></ion-input>
+                    <span class="error-msg" *ngIf="isFieldValid('name')">Please enter a valid Name.</span>
+                </ion-col>
+
+                <ion-col col-12>
+                    <ion-input type="text" name="mobile" formControlName="mobile" [ngClass]="displayFieldCss('mobile')"
+                        placeholder="Mobile"></ion-input>
+                    <span class="error-msg" *ngIf="isFieldValid('mobile')">Please enter a mobile.</span>
+                </ion-col>
+
+                <ion-col col-12>
+                    <ion-input type="email" name="email" formControlName="email" [ngClass]="displayFieldCss('email')"
+                        placeholder="Email"></ion-input>
+                    <span class="error-msg" *ngIf="isFieldValid('email')">Please enter a valid Email.</span>
+                </ion-col>
+
+
+                <ion-col col-12>
+                    <ion-input type="text" name="organization" formControlName="organization"
+                        [ngClass]="displayFieldCss('organization')" placeholder="Organization"></ion-input>
+                    <span class="error-msg" *ngIf="isFieldValid('organization')">Please enter a valid
+                        organization.</span>
+                </ion-col>
+                <ion-col col-12>
+                    <ion-input type="text" name="productname" formControlName="productname"
+                        [ngClass]="displayFieldCss('productname')" placeholder="Product Name"></ion-input>
+                    <span class="error-msg" *ngIf="isFieldValid('productname')">Please enter a valid productname.</span>
+                </ion-col>
+
+                <ion-col col-12>
+                    <ion-input type="text" name="qty" formControlName="qty" [ngClass]="displayFieldCss('qty')"
+                        placeholder="Quantity"></ion-input>
+                    <span class="error-msg" *ngIf="isFieldValid('qty')">Please enter a valid Quantity.</span>
+                </ion-col>
+                <ion-col col-12>
+                    <ion-input type="text" name="unit" formControlName="unit" [ngClass]="displayFieldCss('unit')"
+                        placeholder="Unit"></ion-input>
+                    <span class="error-msg" *ngIf="isFieldValid('unit')">Please enter a valid Unit.</span>
+                </ion-col>
+
+                <ion-col col-12>
+                        <ion-input type="text" name="deliverylocation" formControlName="deliverylocation" [ngClass]="displayFieldCss('deliverylocation')"
+                            placeholder="Delivery Location"></ion-input>
+                        <span class="error-msg" *ngIf="isFieldValid('deliverylocation')">Please enter a valid Delivery Location.</span>
+                </ion-col>
+
+                <ion-col col-12>
+                        <ion-input type="text" name="remarks" formControlName="remarks" [ngClass]="displayFieldCss('remarks')"
+                            placeholder="Remarks"></ion-input>
+                        <span class="error-msg" *ngIf="isFieldValid('remarks')">Please enter a valid Remarks.</span>
+                </ion-col>
+
+
+            </ion-row>
+            <ion-row responsive-sm class="entry-bottom">
+                <ion-col class="pl-0 pr-0">
+                    <button ion-button color="primary" round small>Submit</button>
+                </ion-col>
+            </ion-row>
+        </ion-grid>
+    </form>
 </ion-content>
+<ion-footer>
+    <page-footer></page-footer>
+</ion-footer>

@@ -31,18 +31,18 @@ export class SignupPage {
     private spinnerDialog: SpinnerDialog,
     public menuCtrl: MenuController,
   ) {
-    this.events1.publish('isHeaderHidden', true);
+    this.events1.publish('isHeaderHidden', false);
 
     this.signupForm = this.formBuilder.group({
-      first_name: ['', Validators.required],
-      last_name: ['', Validators.required],
-      email: ['', Validators.required],
-      username: ['', [
-        Validators.required,
-        Validators.minLength(10),
-        Validators.maxLength(10)
-      ]],
+      name: ['', Validators.required],
+      companyname: ['', Validators.required],
+      website: ['', Validators.required],
       password: ['', Validators.required],
+      mobile: ['', Validators.required],
+      email: ['', Validators.required],
+      address: ['', Validators.required],
+      pincode: ['', Validators.required],
+    
     });
   }
 

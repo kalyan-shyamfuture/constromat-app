@@ -34,8 +34,15 @@ export class EnquirePage {
     this.events1.publish('isHeaderHidden', false);
 
     this.enquireForm = this.formBuilder.group({
-      email_phone: ['', Validators.required],
-      password: ['', Validators.required],
+      name: ['', Validators.required],
+      mobile: ['', Validators.required],
+      email: ['', Validators.required],
+      organization: ['', Validators.required],
+      productname: ['', Validators.required],
+      qty: ['', Validators.required],
+      unit: ['', Validators.required],
+      deliverylocation:['', Validators.required],
+      remarks:['', Validators.required],
     });
   }
 

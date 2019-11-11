@@ -1,90 +1,33 @@
-<!-- <ion-header>
-    <ion-navbar>
-       <ion-title>Login</ion-title>
-    </ion-navbar>
- </ion-header> -->
-
 <ion-content class="has-header loginpage-content">
-
+    <div class="logo">
+    </div>
+    <div class="loginform">
         <form [formGroup]="loginForm" novalidate (submit)="signIn()">
 
-                <ion-grid class="form-body">
-                    <ion-row>
-                        
-                        <ion-col col-12>
-                            <ion-input type="email" name="email_phone" formControlName="email_phone" [ngClass]="displayFieldCss('email_phone')" placeholder="Email"></ion-input>
-                            <span class="error-msg" *ngIf="isFieldValid('email_phone')">Please enter a valid Email.</span>
-                        </ion-col>
-                        
-                        <ion-col col-12>
-                            <ion-input type="password" name="password" formControlName="password" [ngClass]="displayFieldCss('password')" placeholder="Password"></ion-input>
-                            <span class="error-msg" *ngIf="isFieldValid('password')">Please enter a Password.</span>
-                        </ion-col>
-                    </ion-row>
-                    <ion-row responsive-sm class="entry-bottom">
-                        <ion-col class="pl-0 pr-0">
-                            <button ion-button color="primary" block>Login</button>
-                        </ion-col>
-                    </ion-row>
-                </ion-grid>
-            </form>
-    <!-- <div class="login-form" *ngIf="isOtpShow==0">
-        <form [formGroup]="loginForm" novalidate (submit)="signIn()">
             <ion-grid class="form-body">
                 <ion-row>
-                   
-                    <ion-col col-8>
-                        <ion-item class="phone-no">
-                            <ion-label color="primary">
-                                +91 <ion-icon name="ios-arrow-down" class="login-arrow-down"></ion-icon>
-                            </ion-label>
-                            <ion-input type="number" formControlName="mobile" name="mobile"
-                            [ngClass]="displayFieldCss('mobile')" placeholder="Mobile Number" autofocus></ion-input>
-                        </ion-item>
+
+                    <ion-col col-12>
+                        <ion-input type="email" name="email_phone" formControlName="email_phone"
+                            [ngClass]="displayFieldCss('email_phone')" placeholder="Email"></ion-input>
+                        <span class="error-msg" *ngIf="isFieldValid('email_phone')">Please enter a valid Email.</span>
                     </ion-col>
-                    <ion-col col-4>
-                        <button [disabled]="!loginForm.valid" ion-button color="primary" round>
-                            <ion-icon name="arrow-round-forward"></ion-icon>
-                        </button>
+
+                    <ion-col col-12>
+                        <ion-input type="password" name="password" formControlName="password"
+                            [ngClass]="displayFieldCss('password')" placeholder="Password"></ion-input>
+                        <span class="error-msg" *ngIf="isFieldValid('password')">Please enter a Password.</span>
                     </ion-col>
                 </ion-row>
-
+                <ion-row responsive-sm class="entry-bottom">
+                    <ion-col class="pl-0 pr-0">
+                        <button ion-button color="primary" block>Login</button>
+                    </ion-col>
+                </ion-row>
             </ion-grid>
         </form>
-        <p class="signup-text" (click)="gotoPage('HomePage')">I'll Signup Later </p>
     </div>
-    <div class="login-form" *ngIf="isOtpShow==1">
-
-        <div class="otp-section">
-
-            <ion-card padding>
-                <div class="otp-close" (click)="otpClose()">
-                    <ion-icon name="ios-close"></ion-icon>
-                </div>
-                <p>We have send a 4-digit OTP </p>
-                <p>+91 {{mobileNo.mobile}} <span style="color:#f93a31;" (click)="gotoPage('LoginPage')">Edit</span> </p>
-                <div class="otp-input2">
-                    <ion-input #Field1 (keyup)="gotoPrevField(Field1,Field0,Field2,'11',otp1,$event)" type="tel"
-                        [(ngModel)]="otp1" maxlength="1"></ion-input>
-
-                    <ion-input #Field2 (keyup)="gotoPrevField(Field2,Field1,Field3,otp1,otp2,$event)" type="tel"
-                        [(ngModel)]="otp2" maxlength="1"></ion-input>
-
-                    <ion-input #Field3 (keyup)="gotoPrevField(Field3,Field2,Field4,otp2,otp3,$event)" type="tel"
-                        [(ngModel)]="otp3" maxlength="1"></ion-input>
-
-                    <ion-input #Field4 type="tel" [(ngModel)]="otp4" maxlength="1"
-                        (keyup)="gotoPrevField(Field4,Field3,Field0,otp3,otp4,$event)"></ion-input>
-
-                    <button ion-button (click)='getTypeOtp(otp1,otp2,otp3,otp4)'>SUBMIT</button>
-                </div>
-                <p style="color:#f93a31;padding-top:0px;" *ngIf="otpStatus==0">OTP Mismatch</p>
-
-                <p *ngIf="showOtpResend" style="color:#f93a31; padding-top:0px;" (click)="resendOtp()">Resend OTP</p>
-
-            </ion-card>
-
+    <div >
+            <p class="text-center not-member" (click)="gotoPage('SignupPage')"> Signup? <span class="creat">Signup</span> </p>
         </div>
-    </div> -->
-
 </ion-content>

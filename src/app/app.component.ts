@@ -35,7 +35,6 @@ export class MyApp {
   faqList: any = [];
   customsegment:string="HomePage";
 
-  public onlineOffline: boolean = navigator.onLine;
   constructor(
     public platform: Platform,
     public statusBar: StatusBar,
@@ -51,26 +50,22 @@ export class MyApp {
     this.platform.ready().then(() => {
       statusBar.styleLightContent();
       statusBar.overlaysWebView(false);
-      statusBar.backgroundColorByHexString("#fcc527");
+      statusBar.backgroundColorByHexString("#9D1212");
       this.deviceId = localStorage.setItem('deviceId', this.device.uuid);
-      if (localStorage.getItem('isLoggedin')) {
-        this.nav.setRoot('HomePage');
-      }
-      else {
-        this.nav.setRoot('LoginPage');
-      }
+      this.nav.setRoot('HomePage');
+      // if (localStorage.getItem('isLoggedin')) {
+      //   this.nav.setRoot('HomePage');
+      // }
+      // else {
+      //   this.nav.setRoot('LoginPage');
+      // }
       this.statusBar.styleDefault();
       this.splashScreen.hide();
       this.navBar.backButtonClick = (e: UIEvent) => {
 
         this.nav.pop();
       }
-    //  this.getDeliverSlot();
 
-      if (!navigator.onLine) {
-        //Do task when no internet connection
-        this.nav.setRoot('NointernetPage');
-      }
     });
 
     this.events1.subscribe('hideBackButton', (data) => {

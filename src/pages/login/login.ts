@@ -57,181 +57,16 @@ export class LoginPage {
       email_phone: ['', Validators.required],
       password: ['', Validators.required],
     });
-   // this.events1.publish('isHeaderHidden', true);
-  //   this.loginForm = this.formBuilder.group({
-  //     mobile: ['', Validators.compose([Validators.minLength(10),Validators.maxLength(10), Validators.required])],
-  //   });
-  //   if (JSON.parse(localStorage.getItem("cart")) != null) {
-  //     this.customer_cart_data = this.isCart;
-  //   }
-  //   else {
-  //     this.customer_cart_data = [];
-  //   }
-  //   var str = "1234";
-  //   var res = str.split("");
-  //  var a = res[0];
-  //  var b = res[1];
-  //  var c = res[2];
-  //  var d = res[3];
-
   }
 
   ionViewDidLoad() {
   //  this.events1.publish('hideBackButton', false);
     this.menuCtrl.close();
-   // this.isOtpShow =0;
    // this.menuCtrl.enable(false);
   }
 
-  // ionViewWillEnter() {
-  //   this.menuCtrl.enable(true);
-  //  this.events1.publish('hideBackButton', true);
-  //   this.events1.publish('isHeaderHidden', true);
-  //   this.menuCtrl.enable(false);
-  // }
-  // ionViewWillLeave() {
-  //   this.menuCtrl.enable(true);
-  // }
-
-
-//   signIn() {
-//     if (this.loginForm.valid) {
-//      this.loginForm.value.device_token = localStorage.getItem('deviceId');
-//      this.mobileNo = this.loginForm.value;
-//      this.sp.userLogin(this.loginForm.value).subscribe(
-//       res => { 
-//         this.isOtpShow =1;
-//         this.getOtp = res['result']['otp'];
-//         this.getOtp = this.getOtp.toString();
-//         var str = "1234";
-//         var resOtp = this.getOtp.split("");
-//        this.opt1 = resOtp[0];
-//        this.opt2 = resOtp[1];
-//        this.opt3 = resOtp[2];
-//        this.opt4 = resOtp[3];
-
-//        this.showResendOtp();
-//       },
-//       error => {
-//         this.presentToast("Please check your internet connection!!!");
-//       }
-//     )
-//     this.isOtpShow =1;
-//     var str = "1234";
-//     }
-//     else {
-//     }
-//   }
-
-//   resendOtp() {
-//     this.spinnerDialog.show();
-//     this.sp.userLogin(this.mobileNo).subscribe(
-//       res => {  
-//         this.isOtpShow =1;
-//         this.getOtp = res['result']['otp'];
-//         this.getOtp = this.getOtp.toString();
-//         var str = "1234";
-//         var resOtp = this.getOtp.split("");
-//        this.opt1 = resOtp[0];
-//        this.opt2 = resOtp[1];
-//        this.opt3 = resOtp[2];
-//        this.opt4 = resOtp[3];
-//        this.spinnerDialog.hide();
-//        this.presentToast("OTP send succesfully");
-//       },
-//       error => {
-//         this.presentToast("Something going wrong");
-//         this.spinnerDialog.hide();
-//       }
-//     )
-//   }
-
-//   getTypeOtp(type1,type2,type3,type4) {
-//     this.typeOtp = type1+""+type2+""+type3+""+type4;
-//    if(this.typeOtp ==this.getOtp ) {
-
-//     var data = {
-
-//     }
-//     this.sp.userLoginFinal(this.mobileNo).subscribe(
-//       res => {
-//         this.userDetails = res['result']['user'];
-//         localStorage.setItem('logged_user_name', this.userDetails['name']);
-//         localStorage.setItem('logged_user_email', this.userDetails['email']);
-//         localStorage.setItem('logged_user_contact_no', this.userDetails['contact']);
-//         localStorage.setItem('logged_user_id', this.userDetails['id']);
-//         localStorage.setItem('isLoggedin', 'true')
-//         this.sp.loginStatus(true);
-//         this.navCtrl.setRoot('HomePage');
-//         if(this.userDetails['is_email_verified'] ==1) {
-//           this.navCtrl.setRoot('HomePage');
-//         }
-//         else {
-//           this.navCtrl.setRoot('ProfilePage');
-//         }
-        
-     
-//       },
-//       error => {
-//         this.presentToast("Please check your login credential");
-//       }
-//     )
-//    }
-//    else {
-//      this.otpStatus = 0;
-//    }
-//   }
-
-//   clearMsg() {
-//     this.otpStatus = 1;
-//   }
-
-//   otpClose() {
-
-//     this.otp1 = '';
-//     this.otp2 = '';
-//     this.otp3 = '';
-//     this.otp4 = '';
-//     this.isOtpShow =0;
-
-//   }
-
-//   setCartData() {
-//     localStorage.setItem("cart", JSON.stringify(this.customer_cart_data));
-//   }
-
-//   gotoPage(page) {
-//     this.navCtrl.push(page);
-//   }
-
-//   gotoNextField(nextElement,otp) {
-//     if(otp) {
-//       nextElement.setFocus();
-//     }
-  
-// }
-
-
-// gotoPrevField(current,prev,next,otpPrev,otpCurrent,e) {
-//   if(otpCurrent){
-//     next.setFocus();
-//   }
-//   else {
-//     prev.setFocus();
-//   }
-// }
-
-
-
-// showResendOtp() {
-//   this.showOtpResend= false;
-
-//   let hideFooterTimeout = setTimeout( () => {
-//     this.showOtpResend= true;
-//   }, 10000);
-
-// }
-
+  ionViewWillEnter() {
+  }
 
   signIn() {
     if (this.loginForm.valid) {
@@ -250,12 +85,15 @@ export class LoginPage {
         }
       },
       error => {
-        this.presentToast("Please check your internet connection!!!");
+        this.presentToast("Error!!!!");
       }
     )
     }
   }
 
+  gotoPage(page) {
+    this.navCtrl.push(page);
+  }
   
   markFormGroupTouched(formGroup: FormGroup) {
     (<any>Object).values(formGroup.controls).forEach(control => {
@@ -285,8 +123,5 @@ export class LoginPage {
     });
     toast.present();
   }
-
-  
-
   
 }
