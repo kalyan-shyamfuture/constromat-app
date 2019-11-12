@@ -366,3 +366,21 @@ ion-label {
 .entry-bottom {
     text-align: center;
 }
+
+.loginPage
+{
+    .image-logo
+    {
+        height: 200px;
+        text-align: center;
+        padding: 50px 0;
+
+    }
+    .font-size{
+        font-size: 1.3rem;
+        color: black;
+    }
+    .font-button-color .button-inner{
+        color:#e6a3ba
+    }
+}

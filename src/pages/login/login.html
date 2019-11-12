@@ -1,4 +1,4 @@
-<ion-content class="has-header loginpage-content">
+<!-- <ion-content class="has-header loginpage-content">
     <div class="logo">
     </div>
     <div class="loginform">
@@ -29,5 +29,62 @@
     </div>
     <div >
             <p class="text-center not-member" (click)="gotoPage('SignupPage')"> Signup? <span class="creat">Signup</span> </p>
+        </div>
+</ion-content> -->
+
+<ion-content class="has-header loginpage-content loginPage">
+    <div class="logo">
+    </div>
+    <div class="loginform">
+         
+        <div class="image-logo">
+            <img src="../../assets/imgs/logo.png">
+        </div>
+        <form [formGroup]="loginForm" novalidate (submit)="signIn()">
+
+            <ion-grid class="form-body">
+                <ion-row>
+
+                    <ion-col col-12>
+                        <ion-input type="email" name="email_phone" formControlName="email_phone"
+                            [ngClass]="displayFieldCss('email_phone')" placeholder="Email"></ion-input>
+                        <span class="error-msg" *ngIf="isFieldValid('email_phone')">Please enter a valid Email.</span>
+                    </ion-col>
+
+                    <ion-col col-12>
+                        <ion-input type="password" name="password" formControlName="password"
+                            [ngClass]="displayFieldCss('password')" placeholder="Password"></ion-input>
+                        <span class="error-msg" *ngIf="isFieldValid('password')">Please enter a Password.</span>
+                    </ion-col>
+                </ion-row>
+                <ion-row responsive-sm class="entry-bottom">
+                        
+                    <ion-col col-12 class="pl-0 pr-0" text-center>
+                     <button ion-button color="primary" round >Login</button>
+                    </ion-col> 
+                    <ion-col col-12 class="pl-0 pr-0" text-center>
+                            <span class="font-size" (click)="gotoPage('ForgotPage')">Forgotten Password?</span>
+                    </ion-col> 
+                    <ion-col col-12 class="pl-0 pr-0" text-center>
+                    <span style="color: crimson;" >Don't have an account?</span>
+                    </ion-col>         
+
+                                
+                                
+                            
+                   <ion-col col-12>        
+                    <ion-col class="pl-0 pr-0">
+                        <button ion-button color="primary" block class="font-button-color" (click)="gotoPage('VendorregPage')">Sign up as Vendor</button>
+                     </ion-col>
+                     <ion-col class="pl-0 pr-0">
+                            <button ion-button color="primary" block  class="font-button-color" (click)="gotoPage('SignupPage')">Sign up as customer</button>
+                         </ion-col>
+                     </ion-col>
+                </ion-row>
+            </ion-grid>
+        </form>
+    </div>
+    <div>
+            <!-- <p class="text-center not-member" (click)="gotoPage('SignupPage')"> Signup? <span class="creat">Signup</span> </p> -->
         </div>
 </ion-content>

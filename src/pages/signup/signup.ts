@@ -53,7 +53,13 @@ export class SignupPage {
 
   ionViewDidLoad() {
     this.menuCtrl.close();
+    this.getHeaderData();
   }
+
+  ionViewWillEnter() {
+    this.getHeaderData();
+  }
+
   gotoSignin() {
     this.navCtrl.push('LoginPage');
   }
@@ -85,6 +91,17 @@ export class SignupPage {
       position:'top'
     });
     toast.present();
+  }
+
+  getHeaderData() {
+    this.events.publish(
+      "headerData",{
+        "isHeaderHidden": false,
+        "isSubHeaderHidden":true,
+        "hideBackButton": false,
+        "title":"User Registration"
+      }
+    );
   }
 
 }
