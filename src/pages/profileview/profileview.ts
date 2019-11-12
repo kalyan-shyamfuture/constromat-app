@@ -28,7 +28,7 @@ export class ProfileviewPage {
     public navCtrl: NavController,
     public navParams: NavParams,
     public menuCtrl: MenuController,
-    public events1: Events,
+    public events: Events,
     private spinnerDialog: SpinnerDialog,
     public modalCtrl: ModalController,
     ) {
@@ -39,7 +39,12 @@ export class ProfileviewPage {
 
   ionViewDidLoad() {
     this.menuCtrl.close();
-    this.events1.publish('hideBackButton', false);
+    this.events.publish(
+      "headerData",{
+        "mainHeader":true,
+        "subHeader":false
+      }
+    );
   }
 
 

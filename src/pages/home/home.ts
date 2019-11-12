@@ -1,5 +1,5 @@
 import { Component, ViewChild } from '@angular/core';
-import { IonicPage, NavController, NavParams, MenuController, Events,LoadingController,Slides } from 'ionic-angular';
+import { IonicPage, NavController, NavParams, MenuController, Events, LoadingController, Slides } from 'ionic-angular';
 import { SpinnerDialog } from '@ionic-native/spinner-dialog';
 import { ServicesProvider } from '../../core/services/services';
 import { environment } from '../../core/global';
@@ -19,7 +19,7 @@ import { Observable } from "rxjs/Observable";
   templateUrl: 'home.html',
 })
 export class HomePage {
- @ViewChild(Slides) slides: Slides;
+  @ViewChild(Slides) slides: Slides;
 
   baseimg: any = environment.imageBaseUrl;
 
@@ -35,11 +35,19 @@ export class HomePage {
     public menuCtrl: MenuController,
     private spinnerDialog: SpinnerDialog,
     public sp: ServicesProvider,
-    public events1: Events,
+    public events: Events,
     public loadingCtrl: LoadingController
   ) {
     //this.createLoader();
-    this.events1.publish('isHeaderHidden', false);
+    // this.events.publish(
+    //   "headerData", {
+    //     "isHeaderHidden": false,
+    //     "isSubHeaderHidden":false,
+    //     "hideBackButton": true,
+    //     "title":" Welcome to Constromat"
+    //   }
+    // );
+    this.getHeaderData();
     if (localStorage.getItem('isLoggedin')) {
       this.user_id = localStorage.getItem('logged_user_id');
       this.isLoggedin = true;
@@ -50,19 +58,29 @@ export class HomePage {
       this.isLoggedin = false;
       this.deviceId = localStorage.getItem('deviceId');
     }
-      
+
   }
 
   ionViewDidLoad() {
     this.menuCtrl.close();
   }
   ionViewWillEnter() {
-    this.events1.publish('hideBackButton', true);
-    this.events1.publish('isHeaderHidden', false);
+    this.getHeaderData();
   }
 
   ionViewDidEnter() {
-    this.events1.publish('hideBackButton', true);
+    this.getHeaderData();
+  }
+
+  getHeaderData() {
+    this.events.publish(
+      "headerData",{
+        "isHeaderHidden": false,
+        "isSubHeaderHidden":false,
+        "hideBackButton": true,
+        "title":" Welcome to Constromat"
+      }
+    );
   }
 
 }

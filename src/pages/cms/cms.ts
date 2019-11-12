@@ -21,7 +21,7 @@ export class CmsPage {
     public navCtrl: NavController, 
     public navParams: NavParams,
     public menuCtrl:MenuController,
-    public events1: Events,
+    public events: Events,
     private spinnerDialog: SpinnerDialog,
     public sp:ServicesProvider
   ) {
@@ -29,7 +29,12 @@ export class CmsPage {
 
   ionViewDidLoad() {
     this.menuCtrl.close();
-    this.events1.publish('isHeaderHidden', false);
+   this.events.publish(
+    "headerData",{
+      "mainHeader":true,
+      "subHeader":false
+    }
+  );
     this.cmsDetails(this.navParams.get('id'));
   }
 

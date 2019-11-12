@@ -25,13 +25,18 @@ export class SignupPage {
   constructor(
     public navCtrl: NavController, 
     public navParams: NavParams,
-    public events1: Events,
+    public events: Events,
     private formBuilder: FormBuilder,
     private toastCtrl: ToastController,
     private spinnerDialog: SpinnerDialog,
     public menuCtrl: MenuController,
   ) {
-    this.events1.publish('isHeaderHidden', false);
+    this.events.publish(
+      "headerData",{
+        "mainHeader":true,
+        "subHeader":false
+      }
+    );
 
     this.signupForm = this.formBuilder.group({
       name: ['', Validators.required],

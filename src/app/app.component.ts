@@ -17,7 +17,9 @@ export class MyApp {
 
   pages: Array<{ title: string, component: any }>;
   baseimg: any = environment.imageBaseUrl;
-  hideBackButton: Boolean = true;
+  hideBackButton: Boolean = false;
+  isSubHeaderHidden:Boolean =false;
+  headerTitle:any;
   totalCart: number;
   logged_first_name: any;
   logged_last_name: any;
@@ -39,7 +41,7 @@ export class MyApp {
     public platform: Platform,
     public statusBar: StatusBar,
     public splashScreen: SplashScreen,
-    public events1: Events,
+    public events: Events,
     public modalCtrl: ModalController,
     public toastCtrl: ToastController,
     private device: Device,
@@ -52,13 +54,13 @@ export class MyApp {
       statusBar.overlaysWebView(false);
       statusBar.backgroundColorByHexString("#9D1212");
       this.deviceId = localStorage.setItem('deviceId', this.device.uuid);
-      this.nav.setRoot('HomePage');
-      // if (localStorage.getItem('isLoggedin')) {
-      //   this.nav.setRoot('HomePage');
-      // }
-      // else {
-      //   this.nav.setRoot('LoginPage');
-      // }
+     // this.nav.setRoot('HomePage');
+      if (localStorage.getItem('isLoggedin')) {
+        this.nav.setRoot('HomePage');
+      }
+      else {
+        this.nav.setRoot('AftersplashPage');
+      }
       this.statusBar.styleDefault();
       this.splashScreen.hide();
       this.navBar.backButtonClick = (e: UIEvent) => {
@@ -68,13 +70,16 @@ export class MyApp {
 
     });
 
-    this.events1.subscribe('hideBackButton', (data) => {
-      this.hideBackButton = data;
+    this.events.subscribe('headerData', (data) => {
+      console.log("Hedaer Data==>", data);
+      this.isHeaderHidden = data.isHeaderHidden;
+      this.isSubHeaderHidden = data.isSubHeaderHidden;
+      this.hideBackButton = data.hideBackButton;
+      this.headerTitle = data.title
     });
 
-    this.events1.subscribe('isHeaderHidden', (data) => {
-      this.isHeaderHidden = data;
-    });
+
+
 
     // sp.getCartNumberStatus.subscribe(status => {
     //   //this.cartNumberStatus(status)

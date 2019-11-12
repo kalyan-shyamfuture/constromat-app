@@ -42,7 +42,7 @@ export class LoginPage {
   constructor(
     public navCtrl: NavController,
     public navParams: NavParams,
-    public events1: Events,
+    public events: Events,
     private toastCtrl: ToastController,
     public menuCtrl: MenuController,
     private formBuilder: FormBuilder,
@@ -50,8 +50,7 @@ export class LoginPage {
     public modalCtrl: ModalController,
     public sp:ServicesProvider,
   ) {
-    //this.events1.publish('isHeaderHidden', false);
-    this.events1.publish('isHeaderHidden', false);
+    this.getHeaderData();
     this.otpStatus=1;
     this.loginForm = this.formBuilder.group({
       email_phone: ['', Validators.required],
@@ -60,12 +59,13 @@ export class LoginPage {
   }
 
   ionViewDidLoad() {
-  //  this.events1.publish('hideBackButton', false);
     this.menuCtrl.close();
    // this.menuCtrl.enable(false);
+   this.getHeaderData();
   }
 
   ionViewWillEnter() {
+    this.getHeaderData();
   }
 
   signIn() {
@@ -122,6 +122,17 @@ export class LoginPage {
       position: 'top'
     });
     toast.present();
+  }
+
+  getHeaderData() {
+    this.events.publish(
+      "headerData",{
+        "isHeaderHidden": false,
+        "isSubHeaderHidden":false,
+        "hideBackButton": true,
+        "title":" Welcome to Constromat"
+      }
+    );
   }
   
 }

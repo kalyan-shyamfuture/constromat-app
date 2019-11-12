@@ -70,13 +70,18 @@ export class ProductdetailsPage {
     public navCtrl: NavController,
     public navParams: NavParams,
     public menuCtrl: MenuController,
-    public events1: Events,
+    public events: Events,
     private spinnerDialog: SpinnerDialog,
     private modalCtrl: ModalController,
     private toastCtrl: ToastController,
     public sp: ServicesProvider,
   ) {
-    this.events1.publish('isHeaderHidden', true);
+    this.events.publish(
+      "headerData",{
+        "mainHeader":true,
+        "subHeader":false
+      }
+    );
     if (localStorage.getItem('isLoggedin')) {
       this.user_id = localStorage.getItem('logged_user_id');
       this.user_name = localStorage.getItem('logged_user_name');
@@ -93,8 +98,12 @@ export class ProductdetailsPage {
 
   ionViewDidLoad() {
     this.menuCtrl.close();
-    this.events1.publish('hideBackButton', false);
-    this.events1.publish('isHeaderHidden', true);
+    this.events.publish(
+      "headerData",{
+        "mainHeader":true,
+        "subHeader":false
+      }
+    );
     this.defaultPagination = 1;
     this.pid = this.navParams.get('id');
     this.catid = this.navParams.get('catid');
@@ -125,8 +134,12 @@ export class ProductdetailsPage {
   }
 
   ionViewWillLeave() {
-    this.events1.publish('hideBackButton', true);
-    this.events1.publish('isHeaderHidden', false);
+    this.events.publish(
+      "headerData",{
+        "mainHeader":true,
+        "subHeader":false
+      }
+    );
   }
 
 

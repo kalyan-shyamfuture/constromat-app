@@ -23,7 +23,7 @@ export class EnquirePage {
   constructor(
     public navCtrl: NavController,
     public navParams: NavParams,
-    public events1: Events,
+    public events: Events,
     private toastCtrl: ToastController,
     public menuCtrl: MenuController,
     private formBuilder: FormBuilder,
@@ -31,7 +31,8 @@ export class EnquirePage {
     public modalCtrl: ModalController,
     public sp:ServicesProvider,
   ) {
-    this.events1.publish('isHeaderHidden', false);
+    this.getHeaderData();
+
 
     this.enquireForm = this.formBuilder.group({
       name: ['', Validators.required],
@@ -44,12 +45,19 @@ export class EnquirePage {
       deliverylocation:['', Validators.required],
       remarks:['', Validators.required],
     });
+
   }
 
   ionViewDidLoad() {
     console.log('ionViewDidLoad EnquirePage');
     this.menuCtrl.close();
+    this.getHeaderData();
   }
+
+  ionViewDidEnter() {
+    this.getHeaderData();
+  }
+
 
 
   signIn() {
@@ -103,6 +111,17 @@ export class EnquirePage {
       position: 'top'
     });
     toast.present();
+  }
+
+  getHeaderData() {
+    this.events.publish(
+      "headerData",{
+        "isHeaderHidden": false,
+        "isSubHeaderHidden":false,
+        "hideBackButton": true,
+        "title":" Welcome to Constromat"
+      }
+    );
   }
 
 }

@@ -322,3 +322,47 @@ ion-label {
     font-size: 1.3em;
     color: #000;
 }
+
+.logo-page-center {
+    align-items: center;
+    width: auto;
+    margin: auto;
+    display: block;
+    margin-top: 25%;
+}
+
+.heading-border-line-splash {
+    align-items: center;
+    display: flex;
+
+    span {
+        border-top: 1px solid #000;
+        width: 60%;
+        display: block;
+        margin: 12% auto;
+    }
+}
+
+.center-bottom {
+    width:40%;
+    margin:0 auto;
+    display:block;
+}
+
+.contact-details {
+    ion-icon {
+        padding:5px;
+        background:#9D1212;
+        color:#fff;
+    }
+
+    
+}
+
+.error-msg {
+    color:#9D1212;
+}
+
+.entry-bottom {
+    text-align: center;
+}

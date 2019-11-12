@@ -11,7 +11,7 @@
             </button>
         </ion-buttons>
         <ion-title class="header-title">
-            Welcome to Constromat
+            {{headerTitle}}
         </ion-title>
         <ion-buttons right>
             <button ion-button icon-only class="basket-img" (click)="gotoPage('AddorderPage')">
@@ -19,7 +19,7 @@
             </button>
         </ion-buttons>
     </ion-navbar>
-    <ion-toolbar>
+    <ion-toolbar *ngIf="!isSubHeaderHidden">
         <ion-segment [(ngModel)]="customsegment" color="primary" (ionChange)="segmentChanged($event)">
             <ion-segment-button value="HomePage">
                 Home

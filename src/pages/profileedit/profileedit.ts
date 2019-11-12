@@ -33,7 +33,7 @@ export class ProfileeditPage {
   constructor(
     public navCtrl: NavController,
     public navParams: NavParams,
-    public events1: Events,
+    public events: Events,
     private formBuilder: FormBuilder,
     private toastCtrl: ToastController,
     private spinnerDialog: SpinnerDialog,
@@ -62,8 +62,12 @@ export class ProfileeditPage {
 
   ionViewDidLoad() {
     this.menuCtrl.close();
-    this.events1.publish('hideBackButton', false);
-    this.events1.publish('isHeaderHidden', true);
+    this.events.publish(
+      "headerData",{
+        "mainHeader":true,
+        "subHeader":false
+      }
+    );
     this.getUserDetails(this.userId);
   }
   getUserDetails(id) {

@@ -55,7 +55,7 @@ export class ProductlistPage {
     public navParams: NavParams,
     public menuCtrl: MenuController,
     private spinnerDialog: SpinnerDialog,
-    public events1: Events,
+    public events: Events,
     public modalCtrl: ModalController,
     public viewCtrl: ViewController,
     public sp: ServicesProvider,
@@ -84,8 +84,12 @@ export class ProductlistPage {
   ionViewDidLoad() {
     this.defaultPagination = 1;
     this.menuCtrl.close();
-    this.events1.publish('hideBackButton', false);
-    this.events1.publish('isHeaderHidden', false);
+    this.events.publish(
+      "headerData",{
+        "mainHeader":true,
+        "subHeader":false
+      }
+    );
     this.rating = [1, 2, 3, 4, 5];
 
     if (localStorage.getItem("cart")) {
