@@ -83,7 +83,7 @@
 
             <ion-row responsive-sm class="entry-bottom">
                 <ion-col class="pl-0 pr-0">
-                    <button ion-button color="primary" round small>Submit</button>
+                    <button ion-button color="primary" round small [disabled]="!contactForm.valid">Submit</button>
                 </ion-col>
             </ion-row>
           </ion-grid>

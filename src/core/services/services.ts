@@ -207,4 +207,10 @@ export class ServicesProvider {
     return this.http.get(environment.apiEndpoint + 'bannerlist/', { headers: this.headers });
   }
 
+  requestContact(data) {
+    return this.http.post(environment.apiEndpoint + 'contactusmail/', data, { headers: this.headers });
+  }
+
+
+
 }

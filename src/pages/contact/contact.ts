@@ -1,6 +1,7 @@
 import { Component, ViewChild, ElementRef } from '@angular/core';
-import { IonicPage, NavController, NavParams, MenuController,Events } from 'ionic-angular';
+import { IonicPage, NavController, NavParams, MenuController,Events,ToastController } from 'ionic-angular';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
+import { ServicesProvider } from '../../core/services/services';
 declare var google;
 /**
  * Generated class for the ContactPage page.
@@ -24,6 +25,8 @@ export class ContactPage {
     public menuCtrl: MenuController,
     public events: Events,
     private formBuilder: FormBuilder,
+    private sp:ServicesProvider,
+    private toastCtrl: ToastController,
   ) {
     this.getHeaderData();
     this.contactForm = this.formBuilder.group({
@@ -94,7 +97,20 @@ export class ContactPage {
   sendContact() {
     if (this.contactForm.valid) {
       console.log(this.contactForm.value);
-    }
+     this.sp.requestContact(this.contactForm.value).subscribe(
+      res => { 
+        this.presentToast(res['result']);
+        this.contactForm.reset();
+        
+      },
+      error => {
+        this.presentToast("Error!!!!");
+      }
+    )
+    
+  }
+
+  
   }
 
   getHeaderData() {
@@ -127,6 +143,16 @@ export class ContactPage {
       'is-valid': form.get(field).valid && (form.get(field).dirty || form.get(field).touched)
     };
   }
+
+  presentToast(msg) {
+    const toast = this.toastCtrl.create({
+      message: msg,
+      duration: 3000,
+      position: 'top'
+    });
+    toast.present();
+  }
+
 
 
 }
