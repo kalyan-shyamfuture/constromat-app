@@ -10,57 +10,96 @@
         <ion-grid class="form-body">
             <ion-row>
                 <ion-col col-12>
-                    <ion-input type="text" name="name" formControlName="name" [ngClass]="displayFieldCss('name')"
-                        placeholder="First Name"></ion-input>
-                    <span class="error-msg" *ngIf="isFieldValid('name')">Please enter a Name.</span>
+                    <ion-input type="text" name="name" formControlName="name"
+                        [ngClass]="displayFieldCss(signupForm,'name')" placeholder="First Name"></ion-input>
+                    <span class="error-msg" *ngIf="isFieldValid(signupForm,'name')">Please enter a Name.</span>
                 </ion-col>
-                <ion-col col-12>
-                    <ion-input type="text" name="companyname" formControlName="companyname"
-                        [ngClass]="displayFieldCss('companyname')" placeholder="Company Name"></ion-input>
-                    <span class="error-msg" *ngIf="isFieldValid('companyname')">Please enter a Company Name.</span>
+               <ion-col col-12>
+                    <ion-input type="text" name="company_name" formControlName="company_name"
+                        [ngClass]="displayFieldCss(signupForm,'company_name')" placeholder="Company Name"></ion-input>
+                    <span class="error-msg" *ngIf="isFieldValid(signupForm,'company_name')">Please enter a Company
+                        Name.</span>
                 </ion-col>
 
-                <ion-col col-12>
+                 <ion-col col-12>
                     <ion-input type="text" name="website" formControlName="website"
-                        [ngClass]="displayFieldCss('website')" placeholder="Website"></ion-input>
-                    <span class="error-msg" *ngIf="isFieldValid('website')">Please enter a Website.</span>
+                        [ngClass]="displayFieldCss(signupForm,'website')" placeholder="Website"></ion-input>
+                    <span class="error-msg" *ngIf="isFieldValid(signupForm,'website')">Please enter a Website.</span>
                 </ion-col>
 
+                <ion-col col-12>
+                    <ion-select col-12 interface="alert" placeholder="business Type" name="business_type"
+                        formControlName="business_type" [ngClass]="displayFieldCss(signupForm,'business_type')">
+                        <ion-option *ngFor="let businessMode of businessType">{{businessMode.type}}</ion-option>
+                    </ion-select>
+                    <span class="error-msg" *ngIf="isFieldValid(signupForm,'business_type')">Please enter business type
+                        .</span>
+                </ion-col>
+
+               <ion-col col-12>
+                    <ion-select col-12 interface="alert" placeholder="Last Financial Year Turnover" name="turnover" formControlName="turnover" [ngClass]="displayFieldCss(signupForm,'turnover')">
+                      <ion-option *ngFor="let financial of financialTurnover">{{financial.price}}</ion-option>
+                    </ion-select>
+                    <span class="error-msg" *ngIf="isFieldValid(signupForm,'turnover')">Please select last financial year turnover .</span>
+                  </ion-col>
+
+ 
                 <ion-col col-12>
                     <ion-input type="password" name="password" formControlName="password"
-                        [ngClass]="displayFieldCss('password')" placeholder="Password"></ion-input>
-                    <span class="error-msg" *ngIf="isFieldValid('password')">Please enter a Password.</span>
+                        [ngClass]="displayFieldCss(signupForm,'password')" placeholder="Password"></ion-input>
+                    <span class="error-msg" *ngIf="isFieldValid(signupForm,'password')">Please enter a Password.</span>
                 </ion-col>
 
                 <ion-col col-12>
-                    <ion-input type="text" name="mobile" formControlName="mobile" [ngClass]="displayFieldCss('mobile')"
-                        placeholder="Mobile Number"></ion-input>
-                    <span class="error-msg" *ngIf="isFieldValid('mobile')">Please enter a Mobile.</span>
+                    <ion-input type="text" name="phone" formControlName="phone"
+                        [ngClass]="displayFieldCss(signupForm,'phone')" placeholder="Mobile Number"></ion-input>
+                    <span class="error-msg" *ngIf="isFieldValid(signupForm,'phone')">Please enter a Mobile.</span>
                 </ion-col>
 
                 <ion-col col-12>
-                    <ion-input type="email" name="email" formControlName="email" [ngClass]="displayFieldCss('email')"
-                        placeholder="Email"></ion-input>
-                    <span class="error-msg" *ngIf="isFieldValid('email')">Please enter a valid Email.</span>
+                    <ion-input type="email" name="email" formControlName="email"
+                        [ngClass]="displayFieldCss(signupForm,'email')" placeholder="Email"></ion-input>
+                    <span class="error-msg" *ngIf="isFieldValid(signupForm,'email')">Please enter a valid Email.</span>
                 </ion-col>
 
                 <ion-col col-12>
-                        <ion-input type="text" name="address" formControlName="address" [ngClass]="displayFieldCss('address')"
-                            placeholder="Address"></ion-input>
-                        <span class="error-msg" *ngIf="isFieldValid('address')">Please enter a Address.</span>
-                    </ion-col>
+                    <ion-select col-12 interface="alert" placeholder="Country" name="country" formControlName="country" [ngClass]="displayFieldCss(signupForm,'country')">
+                      <ion-option *ngFor="let name of country">{{name.name}}</ion-option>
+                    </ion-select>
+                    <span class="error-msg" *ngIf="isFieldValid(signupForm,'country')">Please choose your country .</span>
+                  </ion-col>
+        
+                  <ion-col col-12>
+                    <ion-select col-12 interface="alert" placeholder="State" name="state" formControlName="state" [ngClass]="displayFieldCss(signupForm,'state')">
+                      <ion-option *ngFor="let name of state">{{name.name}}</ion-option>
+                    </ion-select>
+                    <span class="error-msg" *ngIf="isFieldValid(signupForm,'state')">Please choose your state.</span>
+                  </ion-col>
+        
+                  <ion-col col-12>
+                    <ion-select col-12 interface="alert" placeholder="City" name="city" formControlName="city" [ngClass]="displayFieldCss(signupForm,'city')">
+                      <ion-option *ngFor="let name of city">{{name.name}}</ion-option>
+                    </ion-select>
+                    <span class="error-msg" *ngIf="isFieldValid(signupForm,'city')">Please choose your city</span>
+                  </ion-col>
+
+                  <ion-col col-12>
+                    <ion-input type="text" name="address" formControlName="address"
+                        [ngClass]="displayFieldCss(signupForm,'address')" placeholder="Address"></ion-input>
+                    <span class="error-msg" *ngIf="isFieldValid(signupForm,'address')">Please enter a Address.</span>
+                </ion-col>
 
 
-                    <ion-col col-12>
-                            <ion-input type="text" name="pincode" formControlName="pincode" [ngClass]="displayFieldCss('pincode')"
-                                placeholder="Pincode"></ion-input>
-                            <span class="error-msg" *ngIf="isFieldValid('pincode')">Please enter a Pincode.</span>
-                        </ion-col>
+                <ion-col col-12>
+                    <ion-input type="text" name="pincode" formControlName="pincode"
+                        [ngClass]="displayFieldCss(signupForm,'pincode')" placeholder="Pincode"></ion-input>
+                    <span class="error-msg" *ngIf="isFieldValid(signupForm,'pincode')">Please enter a Pincode.</span>
+                </ion-col> 
 
             </ion-row>
             <ion-row responsive-sm class="entry-bottom">
                 <ion-col class="pl-0 pr-0">
-                    <button ion-button color="primary" block>Sign Up</button>
+                    <button ion-button color="primary" block [disabled]="!signupForm.valid">Sign Up</button>
                 </ion-col>
             </ion-row>
         </ion-grid>

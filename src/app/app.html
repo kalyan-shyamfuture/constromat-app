@@ -38,74 +38,128 @@
 </ion-header>
 
 
+
 <ion-menu [content]="mycontent" swipeEnabled="false">
-    <ion-content class="menu-nav">
-        <ion-item>
-            <ion-avatar item-start>
-                <!-- <img src="assets/imgs/man.jpg"> -->
-                <img src="assets/imgs/logo.png">
-            </ion-avatar>
-            <h2>{{logged_user_name}}
-
-                <span (click)="menuClose()" class="arrow-forward">
-                    <ion-icon ios="ios-arrow-forward" md="md-arrow-forward"></ion-icon>
-                </span>
-            </h2>
-            <p>Test User</p>
-
-            <!-- <p *ngIf="isLoggedin">+91 {{logged_user_contact_no}}
-
-            </p>
-            <p (click)="logOut()" *ngIf="isLoggedin">Logout</p>
-            <p (click)="gotoPage('LoginPage')" *ngIf="!isLoggedin">Login</p> -->
-        </ion-item>
-
-
-
-        <ion-card class="delivery-sidebar">
-            <ion-list>
-                <button class="orders-text" ion-item (click)="gotoPage('HomePage')">
-                    Home
-                </button>
-                <!-- <button class="orders-text" ion-item (click)="gotoPage('OrdersPage')" *ngIf="isLoggedin">
-                    My Orders
-                </button>
-                <button class="orders-text" ion-item (click)="gotoPage('LoginPage')" *ngIf="!isLoggedin">
-                    My Orders
-                </button>
-
-                <button class="orders-text" ion-item (click)="gotoPage('CategoryPage')">
-                    Categories
-                </button> -->
-            </ion-list>
-            <ion-list>
-                <button class="orders-text" ion-item (click)="gotoCmsPage(3)">
-                    About Us
-                </button>
-            </ion-list>
-            <ion-list>
-                <button class="orders-text" ion-item (click)="gotoCmsPage(4)">
-                    Terms & Conditions
-                </button>
-            </ion-list>
-
-            <ion-list>
-                <button class="orders-text" ion-item (click)="gotoCmsPage(9)">
-                    Privacy Policy
-                </button>
-            </ion-list>
-
-            <ion-list>
-                <button class="orders-text" ion-item (click)="gotoPage('FaqPage')">
-
-                    FAQ?
-                </button>
-            </ion-list>
-        </ion-card>
-        <ion-card class="delivery-sidebar">
-        </ion-card>
-    </ion-content>
-</ion-menu>
+        <ion-content class="menu-nav app-html">
+            <ion-item>
+                <h2>{{logged_user_name}}
+                    <span (click)="menuClose()" class="arrow-forward">
+                        <ion-icon ios="ios-arrow-forward" md="md-arrow-forward"></ion-icon>
+                    </span>
+                </h2>
+            </ion-item>
+             <ion-grid class="form-body">
+                <ion-row justify-content-center>
+    
+                    <div class="nav-bar-text">
+                        <ion-item no-padding text-center class="sidebar-avatar">
+                            <ion-avatar text-center>
+                                <img src="assets/imgs/logo.png">
+                            </ion-avatar>
+                            <h2>{{logged_user_name}}
+                            </h2>
+                            <p>Test User</p>
+                        </ion-item>
+                    </div>
+    
+                </ion-row>
+                <ion-row>
+                    <ion-col col-12 class="pl-0 pr-0" text-center>
+    
+    
+                    </ion-col>
+    
+                    <ion-col col-12>
+                        <button class="orders-text" ion-item (click)="gotoPage('HomePage')">
+                            <div class="nav-bar-text" style="color: crimson;">
+                                Home
+                            </div>
+                        </button>
+                    </ion-col>
+                    <ion-col col-12>
+                        <button class="orders-text" ion-item (click)="gotoCmsPage(3)">
+                            <div class="nav-bar-text">
+                                About Us
+                            </div>
+                        </button>
+                    </ion-col>
+                    <ion-col col-12>
+                        <button class="orders-text" ion-item (click)="gotoCmsPage(4)">
+                            <div class="nav-bar-text">
+                                Terms & Conditions
+                            </div>
+                        </button>
+                    </ion-col>
+                    <ion-col col-12>
+                        <button class="orders-text" ion-item (click)="gotoCmsPage(9)">
+                            <div class="nav-bar-text">
+                                Privacy Policy
+                            </div>
+                        </button>
+                    </ion-col>
+                    <ion-col col-12>
+                        <button class="orders-text" ion-item (click)="gotoPage('FaqPage')">
+                            <div class="nav-bar-text">
+                                FAQ?
+                            </div>
+                        </button>
+                    </ion-col>
+                </ion-row>
+            </ion-grid>
+            <ion-grid>
+                <ion-row justify-content-center>
+                    <ion-col col-4></ion-col>
+                    <ion-col col-1>
+    
+                        <ion-icon name="logo-facebook" (click)="facebook()"></ion-icon>
+                    </ion-col>
+    
+                    <ion-col col-1>
+                        <ion-icon ios="logo-instagram" md="logo-instagram" (click)="instagram()"></ion-icon>
+                    </ion-col>
+    
+                    <ion-col col-1>
+                        <ion-icon ios="logo-twitter" md="logo-twitter" (click)="twitter()"></ion-icon>
+    
+                    </ion-col>
+                    <ion-col col-4></ion-col>
+                </ion-row>
+            </ion-grid>
+            <!-- <ion-list>
+                  
+                     <button class="orders-text" ion-item (click)="gotoPage('OrdersPage')" *ngIf="isLoggedin">
+                        My Orders
+                    </button>
+                    <button class="orders-text" ion-item (click)="gotoPage('LoginPage')" *ngIf="!isLoggedin">
+                        My Orders
+                    </button>
+    
+                    <button class="orders-text" ion-item (click)="gotoPage('CategoryPage')">
+                        Categories
+                    </button> 
+                </ion-list>
+                <ion-list>
+    
+                </ion-list>
+                <ion-list>
+    
+                </ion-list>
+    
+                <ion-list>
+    
+                </ion-list>
+    
+                <ion-list>
+                    <button class="orders-text" ion-item (click)="gotoPage('FaqPage')">
+    
+                        FAQ?
+                    </button>
+                </ion-list> -->
+    
+            <ion-card class="delivery-sidebar">
+            </ion-card>
+        </ion-content>
+    </ion-menu>
 <ion-content>
     <ion-nav #mycontent [root]="rootPage" swipeBackEnabled="false"></ion-nav>
 </ion-content>

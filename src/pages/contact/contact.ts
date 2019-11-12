@@ -28,7 +28,7 @@ export class ContactPage {
     this.getHeaderData();
     this.contactForm = this.formBuilder.group({
       name: ['', Validators.required],
-      mobile: ['', Validators.required],
+      phone: ['', Validators.required],
       email: ['', Validators.required],
       message: ['', Validators.required]
     });

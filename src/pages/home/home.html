@@ -6,15 +6,15 @@
 <ion-content class="has-header home-page">
    <div class="banner-list">
       <ion-slides zoom="false" pager>
-         <ion-slide>
-            <img class="banner-img" src="assets/imgs/banner2.png" />
+         <ion-slide *ngFor="let banner of bannerList  let i=index">
+            <img class="banner-img" src="{{baseimg+banner.image_large}}" />
          </ion-slide>
-         <ion-slide>
+         <!-- <ion-slide>
             <img class="banner-img" src="assets/imgs/banner1.jpg" />
          </ion-slide>
          <ion-slide>
             <img class="banner-img" src="assets/imgs/banner3.jpg" />
-         </ion-slide>
+         </ion-slide> -->
       </ion-slides>
    </div>
    <div class="our-product">

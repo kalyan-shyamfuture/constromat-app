@@ -384,3 +384,24 @@ ion-label {
         color:#e6a3ba
     }
 }
+
+.app-html{
+    .item-md.item-block .item-inner {
+      
+       border-bottom: 0px solid #dedede;
+   }
+   .nav-bar-text{
+       text-align: center;
+   }
+   .sidebar-avatar {
+       .item-inner {
+           padding: 0;
+       }
+       ion-label {
+           margin: 0;
+       }
+       ion-avatar img {
+           display: inline-block;
+       }
+   }
+}

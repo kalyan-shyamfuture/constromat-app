@@ -9,14 +9,14 @@
 
                     <ion-col col-12>
                         <ion-input type="email" name="email_phone" formControlName="email_phone"
-                            [ngClass]="displayFieldCss('email_phone')" placeholder="Email"></ion-input>
-                        <span class="error-msg" *ngIf="isFieldValid('email_phone')">Please enter a valid Email.</span>
+                            [ngClass]="displayFieldCss(loginForm,'email_phone')" placeholder="Email"></ion-input>
+                        <span class="error-msg" *ngIf="isFieldValid(loginForm,'email_phone')">Please enter a valid Email.</span>
                     </ion-col>
 
                     <ion-col col-12>
                         <ion-input type="password" name="password" formControlName="password"
-                            [ngClass]="displayFieldCss('password')" placeholder="Password"></ion-input>
-                        <span class="error-msg" *ngIf="isFieldValid('password')">Please enter a Password.</span>
+                            [ngClass]="displayFieldCss(loginForm,'password')" placeholder="Password"></ion-input>
+                        <span class="error-msg" *ngIf="isFieldValid(loginForm,'password')">Please enter a Password.</span>
                     </ion-col>
                 </ion-row>
                 <ion-row responsive-sm class="entry-bottom">
@@ -47,20 +47,20 @@
 
                     <ion-col col-12>
                         <ion-input type="email" name="email_phone" formControlName="email_phone"
-                            [ngClass]="displayFieldCss('email_phone')" placeholder="Email"></ion-input>
-                        <span class="error-msg" *ngIf="isFieldValid('email_phone')">Please enter a valid Email.</span>
+                            [ngClass]="displayFieldCss(loginForm,'email_phone')" placeholder="Email"></ion-input>
+                        <span class="error-msg" *ngIf="isFieldValid(loginForm,'email_phone')">Please enter a valid Email.</span>
                     </ion-col>
 
                     <ion-col col-12>
                         <ion-input type="password" name="password" formControlName="password"
-                            [ngClass]="displayFieldCss('password')" placeholder="Password"></ion-input>
-                        <span class="error-msg" *ngIf="isFieldValid('password')">Please enter a Password.</span>
+                            [ngClass]="displayFieldCss(loginForm,'password')" placeholder="Password"></ion-input>
+                        <span class="error-msg" *ngIf="isFieldValid(loginForm,'password')">Please enter a Password.</span>
                     </ion-col>
                 </ion-row>
                 <ion-row responsive-sm class="entry-bottom">
                         
                     <ion-col col-12 class="pl-0 pr-0" text-center>
-                     <button ion-button color="primary" round >Login</button>
+                     <button ion-button color="primary" round  [disabled]="!loginForm.valid" >Login</button>
                     </ion-col> 
                     <ion-col col-12 class="pl-0 pr-0" text-center>
                             <span class="font-size" (click)="gotoPage('ForgotPage')">Forgotten Password?</span>

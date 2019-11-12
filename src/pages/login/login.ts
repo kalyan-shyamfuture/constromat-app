@@ -104,16 +104,17 @@ export class LoginPage {
     });
   }
 
-  isFieldValid(field: string) {
-    return !this.loginForm.get(field).valid && (this.loginForm.get(field).dirty || this.loginForm.get(field).touched);
+  isFieldValid(form: FormGroup, field: string) {
+    return !form.get(field).valid && (form.get(field).dirty || form.get(field).touched);
   }
 
-  displayFieldCss(field: string) {
+  displayFieldCss(form: FormGroup, field: string) {
     return {
-      'is-invalid': this.loginForm.get(field).invalid && (this.loginForm.get(field).dirty || this.loginForm.get(field).touched),
-      'is-valid': this.loginForm.get(field).valid && (this.loginForm.get(field).dirty || this.loginForm.get(field).touched)
+      'is-invalid': form.get(field).invalid && (form.get(field).dirty || form.get(field).touched),
+      'is-valid': form.get(field).valid && (form.get(field).dirty || form.get(field).touched)
     };
   }
+
 
   presentToast(msg) {
     const toast = this.toastCtrl.create({

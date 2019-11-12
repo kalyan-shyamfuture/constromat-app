@@ -51,9 +51,7 @@ export class ServicesProvider {
     return this.http.post(environment.apiEndpoint + 'cartcount/', data, { headers: this.headers });
   }
 
-  getBannerList() {
-    return this.http.get(environment.apiEndpoint + 'bannerlist/', { headers: this.headers });
-  }
+ 
 
   getGeneralList() {
     return this.http.get(environment.apiEndpoint + 'generallist/', { headers: this.headers });
@@ -203,6 +201,10 @@ export class ServicesProvider {
   // Final Api fotr constromat
   userLogin(data) {
     return this.http.post(environment.apiEndpoint + 'userlogin/', data, { headers: this.headers });
+  }
+
+  getBannerList() {
+    return this.http.get(environment.apiEndpoint + 'bannerlist/', { headers: this.headers });
   }
 
 }

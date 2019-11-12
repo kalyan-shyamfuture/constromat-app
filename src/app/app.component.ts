@@ -64,23 +64,17 @@ export class MyApp {
       this.statusBar.styleDefault();
       this.splashScreen.hide();
       this.navBar.backButtonClick = (e: UIEvent) => {
-
         this.nav.pop();
       }
-
     });
 
     this.events.subscribe('headerData', (data) => {
-      console.log("Hedaer Data==>", data);
       this.isHeaderHidden = data.isHeaderHidden;
       this.isSubHeaderHidden = data.isSubHeaderHidden;
       this.hideBackButton = data.hideBackButton;
       this.headerTitle = data.title
     });
-
-
-
-
+    
     // sp.getCartNumberStatus.subscribe(status => {
     //   //this.cartNumberStatus(status)
     // });
