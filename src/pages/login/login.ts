@@ -19,6 +19,13 @@ import { ServicesProvider } from '../../core/services/services';
 export class LoginPage {
   showOtpResend:boolean;
   loginForm: FormGroup;
+  loginMobileForm: FormGroup;
+  otpForm: FormGroup;
+  newOtp:any;
+  loginType:any="email";
+  getDetails:any;
+  showOtp:boolean=false;
+
   lastPage: any;
   isCart: any;
   customer_cart_data: any = [];
@@ -53,8 +60,16 @@ export class LoginPage {
     this.getHeaderData();
     this.otpStatus=1;
     this.loginForm = this.formBuilder.group({
-      email_phone: ['', Validators.required],
+      email: ['', Validators.required],
       password: ['', Validators.required],
+    });
+
+    this.loginMobileForm = this.formBuilder.group({
+      mobile: ['', Validators.required],
+    });
+
+    this.otpForm = this.formBuilder.group({
+      otp: ['', Validators.required],
     });
   }
 
@@ -66,6 +81,10 @@ export class LoginPage {
 
   ionViewWillEnter() {
     this.getHeaderData();
+  }
+
+  onSegmentChange(val) {
+    this.loginType = val;
   }
 
   signIn() {
@@ -89,6 +108,46 @@ export class LoginPage {
       }
     )
     }
+  }
+
+  signInMobile() {
+    if (this.loginMobileForm.valid) {
+     this.sp.userLoginMobile(this.loginMobileForm.value).subscribe(
+      res => { 
+        console.log(res);
+        if(res['status']) {
+          this.showOtp =true;
+          this.getOtp = res['result']['otp'];
+          this.getDetails = res['result']['detail'];
+          console.log(this.getOtp);
+          this.presentToast("OTP - "+this.getOtp);
+        }
+      },
+      error => {
+        this.presentToast("Error!!!!");
+      }
+    )
+    }
+  }
+
+  signInOtp() {
+    this.newOtp = this.otpForm.value.otp;
+    if(this.newOtp == this.getOtp) {
+      console.log("OTP matched!!");
+
+      localStorage.setItem('logged_user_name',  this.getDetails['name']);
+            localStorage.setItem('logged_user_email',  this.getDetails['email']);
+            localStorage.setItem('logged_user_contact_no',  this.getDetails['phone']);
+            localStorage.setItem('logged_user_id',  this.getDetails['id']);
+            localStorage.setItem('isLoggedin', 'true')
+            this.sp.loginStatus(true);
+               this.navCtrl.setRoot('HomePage');
+    }
+    else {
+      console.log("OTP Mismatched");
+      this.presentToast("OTP Mismatched!!!");
+    }
+   
   }
 
   gotoPage(page) {

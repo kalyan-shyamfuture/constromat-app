@@ -19,8 +19,11 @@ import { ServicesProvider } from '../../core/services/services';
 })
 export class VendorregPage {
   vendorForm: FormGroup;
- 
-  turnover : any = [
+  countryList:any=[];
+  stateList:any=[];
+  cityList:any=[];
+
+  financialTurnover : any = [
     {id:1, price:"Less than 50L"},
     {id:1, price:"50L less than 1 Cr"},
     {id:1, price:"1Cr less than 5Cr"},
@@ -28,22 +31,8 @@ export class VendorregPage {
     {id:1, price:"25Cr and more"},
   ] 
 
-  country : any = [
-    {id:1, name:"India"},
-    {id:1, name:"Usa"},
-  ]
-
-  state : any = [
-    {id:1, name:"Westbengal"},
-    {id:1, name:"Delhi"},
-  ]
-
-  city : any = [
-    {id:1, name:"Durgapur"},
-    {id:1, name:"Kolkata"},
-  ]
-
-  businessType :any =[
+ 
+  business_type :any =[
     {id:1, type:"Construction Company"},
     {id:2, type:"Imfrastructure"},
     {id:3, type:"Goverment"},
@@ -69,24 +58,26 @@ export class VendorregPage {
 
     this.vendorForm = this.formBuilder.group({
       name: ['', Validators.required],
-      companyname: ['', Validators.required],
-      businessType: ['',Validators.required],
-      listbox: ['', Validators.required],
+      company_name: ['', Validators.required],
+      business_type: ['',Validators.required],
+      website: ['',Validators.required],
+      list_box: ['', Validators.required],
       gstin: ['', Validators.required],
-      financialTurnover: ['',Validators.required],
+      turnover: ['',Validators.required],
       mobile: ['', Validators.required],
       email: ['', Validators.required],
       country: ['',Validators.required],
       state: ['',Validators.required],
       city: ['',Validators.required],
       address: ['', Validators.required],
-      pincode: ['', Validators.required],
+      pin_code: ['', Validators.required],
     
     });
   }
 
   ionViewDidLoad() {
     this.menuCtrl.close();
+    this.getCountryList();
     this.getHeaderData();
   }
 
@@ -94,14 +85,66 @@ export class VendorregPage {
     this.getHeaderData();
   }
 
-  vendorSignUp()
-  {
 
+  getCountryList() {
+    this.sp.getCountryList().subscribe(
+     res => { 
+       console.log(res);
+       if(res['status']) {
+         this.countryList = res['result']
+       }
+     },
+     error => {
+     }
+   )
+ }
+
+ getStateValues(val) {
+   console.log("Get Values==>",val);
+   this.sp.getStateList(val).subscribe(
+     res => { 
+       console.log(res);
+       if(res['status']) {
+         this.stateList = res['result']
+       }
+     },
+     error => {
+     }
+   )
+ }
+ getCityValues(val) {
+   console.log("Get State id==>",val);
+   this.sp.getCityList(val).subscribe(
+     res => { 
+       console.log(res);
+       if(res['status']) {
+         this.cityList = res['result']
+       }
+     },
+     error => {
+     }
+   )
+ }
+
+  vendorSignUp() {
     if (this.vendorForm.valid) {
-      console.log("Form Submit==>",this.vendorForm.value);
+      console.log(this.vendorForm.value);
+      this.vendorForm.value.user_type ="3";
+     this.sp.vendorContact(this.vendorForm.value).subscribe(
+      res => { 
+        this.presentToast(res['result']);
+        this.vendorForm.reset();
+        
+      },
+      error => {
+        this.presentToast("Error!!!!");
+      }
+    )
+    
   }
-
-}
+  
+  
+  }
 
 markFormGroupTouched(formGroup: FormGroup) {
   (<any>Object).values(formGroup.controls).forEach(control => {

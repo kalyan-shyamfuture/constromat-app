@@ -101,16 +101,12 @@ export class ContactPage {
       res => { 
         this.presentToast(res['result']);
         this.contactForm.reset();
-        
       },
       error => {
         this.presentToast("Error!!!!");
       }
     )
-    
   }
-
-  
   }
 
   getHeaderData() {

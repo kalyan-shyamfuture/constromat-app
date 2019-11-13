@@ -203,6 +203,12 @@ export class ServicesProvider {
     return this.http.post(environment.apiEndpoint + 'userlogin/', data, { headers: this.headers });
   }
 
+  userLoginMobile(data) {
+    return this.http.post(environment.apiEndpoint + 'userloginmobile/', data, { headers: this.headers });
+  }
+
+  
+
   getBannerList() {
     return this.http.get(environment.apiEndpoint + 'bannerlist/', { headers: this.headers });
   }
@@ -210,6 +216,25 @@ export class ServicesProvider {
   requestContact(data) {
     return this.http.post(environment.apiEndpoint + 'contactusmail/', data, { headers: this.headers });
   }
+
+  getCountryList() {
+    return this.http.get(environment.apiEndpoint + 'getcountrylist/', { headers: this.headers });
+  }
+  getStateList(id) {
+    return this.http.get(environment.apiEndpoint + 'getstatelist/'+id, { headers: this.headers });
+  }
+
+  getCityList(id) {
+    return this.http.get(environment.apiEndpoint + 'getcitylist/'+id, { headers: this.headers });
+  }
+  userRegistration(data) {
+    return this.http.post(environment.apiEndpoint + 'userregister/', data, { headers: this.headers });
+  }
+
+  vendorContact(data) {
+    return this.http.post(environment.apiEndpoint + 'userregister/', data, { headers: this.headers });
+  }
+
 
 
 

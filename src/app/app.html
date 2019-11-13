@@ -19,7 +19,7 @@
             </button>
         </ion-buttons>
     </ion-navbar>
-    <ion-toolbar *ngIf="!isSubHeaderHidden">
+    <ion-toolbar class="sub-header" no-padding *ngIf="!isSubHeaderHidden">
         <ion-segment [(ngModel)]="customsegment" color="primary" (ionChange)="segmentChanged($event)">
             <ion-segment-button value="HomePage">
                 Home

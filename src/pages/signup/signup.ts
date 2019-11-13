@@ -3,6 +3,7 @@ import { IonicPage, NavController, NavParams,MenuController,Events } from 'ionic
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { ToastController } from 'ionic-angular';
 import { SpinnerDialog } from '@ionic-native/spinner-dialog';
+import { ServicesProvider } from '../../core/services/services';
 //Services
 
 
@@ -21,8 +22,9 @@ import { SpinnerDialog } from '@ionic-native/spinner-dialog';
 export class SignupPage {
   isShowHeader:number;
   signupForm: FormGroup;
-
-
+  countryList:any=[];
+  stateList:any=[];
+  cityList:any=[];
   businessType :any =[
     {id:1, type:"Construction Company"},
     {id:2, type:"Imfrastructure"},
@@ -44,21 +46,6 @@ export class SignupPage {
     {id:1, price:"25Cr and more"},
   ] 
 
-  country : any = [
-    {id:1, name:"India"},
-    {id:1, name:"Usa"},
-  ]
-
-  state : any = [
-    {id:1, name:"Westbengal"},
-    {id:1, name:"Delhi"},
-  ]
-
-  city : any = [
-    {id:1, name:"Durgapur"},
-    {id:1, name:"Kolkata"},
-  ]
-
   constructor(
     public navCtrl: NavController, 
     public navParams: NavParams,
@@ -67,6 +54,7 @@ export class SignupPage {
     private toastCtrl: ToastController,
     private spinnerDialog: SpinnerDialog,
     public menuCtrl: MenuController,
+    public sp:ServicesProvider
   ) {
     this.events.publish(
       "headerData",{
@@ -88,7 +76,7 @@ export class SignupPage {
       state: ['',Validators.required],
       city: ['',Validators.required],
       address: ['', Validators.required],
-      pincode: ['', Validators.required],
+      pin_code: ['', Validators.required],
     
     });
   }
@@ -96,33 +84,73 @@ export class SignupPage {
   ionViewDidLoad() {
     this.menuCtrl.close();
     this.getHeaderData();
+    this.getCountryList();
   }
 
   ionViewWillEnter() {
     this.getHeaderData();
   }
 
+  getCountryList() {
+     this.sp.getCountryList().subscribe(
+      res => { 
+        console.log(res);
+        if(res['status']) {
+          this.countryList = res['result']
+        }
+      },
+      error => {
+      }
+    )
+  }
+
+  getStateValues(val) {
+    console.log("Get Values==>",val);
+    this.sp.getStateList(val).subscribe(
+      res => { 
+        console.log(res);
+        if(res['status']) {
+          this.stateList = res['result']
+        }
+      },
+      error => {
+      }
+    )
+  }
+  getCityValues(val) {
+    console.log("Get State id==>",val);
+    this.sp.getCityList(val).subscribe(
+      res => { 
+        console.log(res);
+        if(res['status']) {
+          this.cityList = res['result']
+        }
+      },
+      error => {
+      }
+    )
+  }
+
   signUp() {
     if (this.signupForm.valid) {
       console.log("Signup Form ==>",this.signupForm.value);
-    //   this.signupForm.value.user_type ="2";
-    //  this.sp.userLogin(this.signupForm.value).subscribe(
-    //   res => { 
-    //     if(res['result'].status) {
-    //       console.log(res['result']['detail']);
-    //         localStorage.setItem('logged_user_name', res['result']['detail']['name']);
-    //         localStorage.setItem('logged_user_email', res['result']['detail']['email']);
-    //         localStorage.setItem('logged_user_contact_no', res['result']['detail']['phone']);
-    //         localStorage.setItem('logged_user_id', res['result']['detail']['id']);
-    //         localStorage.setItem('isLoggedin', 'true')
-    //         this.sp.loginStatus(true);
-    //            this.navCtrl.setRoot('HomePage');
-    //     }
-    //   },
-    //   error => {
-    //     this.presentToast("Error!!!!");
-    //   }
-    // )
+      this.signupForm.value.user_type ="2";
+     this.sp.userRegistration(this.signupForm.value).subscribe(
+      res => { 
+        console.log(res);
+        if(res['result'].status) {
+          this.presentToast(res['result']['message']);
+          console.log(res['result']['detail']);
+           this.navCtrl.setRoot('LoginPage');
+        }
+        else {
+          this.presentToast(res['message']);
+        }
+      },
+      error => {
+        this.presentToast("Error!!!!");
+      }
+    )
     }
   }
 

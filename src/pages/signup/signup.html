@@ -63,22 +63,22 @@
                 </ion-col>
 
                 <ion-col col-12>
-                    <ion-select col-12 interface="alert" placeholder="Country" name="country" formControlName="country" [ngClass]="displayFieldCss(signupForm,'country')">
-                      <ion-option *ngFor="let name of country">{{name.name}}</ion-option>
+                    <ion-select  (ionChange)="getStateValues($event)" col-12 interface="alert" placeholder="Country" name="country" formControlName="country" [ngClass]="displayFieldCss(signupForm,'country')">
+                      <ion-option  *ngFor="let c of countryList" value="{{c.id}}">{{c.name}}</ion-option>
                     </ion-select>
                     <span class="error-msg" *ngIf="isFieldValid(signupForm,'country')">Please choose your country .</span>
                   </ion-col>
         
                   <ion-col col-12>
-                    <ion-select col-12 interface="alert" placeholder="State" name="state" formControlName="state" [ngClass]="displayFieldCss(signupForm,'state')">
-                      <ion-option *ngFor="let name of state">{{name.name}}</ion-option>
+                    <ion-select (ionChange)="getCityValues($event)" col-12 interface="alert" placeholder="State" name="state" formControlName="state" [ngClass]="displayFieldCss(signupForm,'state')">
+                      <ion-option *ngFor="let state of stateList" value="{{state.id}}">{{state.name}}</ion-option>
                     </ion-select>
                     <span class="error-msg" *ngIf="isFieldValid(signupForm,'state')">Please choose your state.</span>
                   </ion-col>
         
                   <ion-col col-12>
                     <ion-select col-12 interface="alert" placeholder="City" name="city" formControlName="city" [ngClass]="displayFieldCss(signupForm,'city')">
-                      <ion-option *ngFor="let name of city">{{name.name}}</ion-option>
+                      <ion-option *ngFor="let city of cityList" value="{{city.id}}">{{city.name}}</ion-option>
                     </ion-select>
                     <span class="error-msg" *ngIf="isFieldValid(signupForm,'city')">Please choose your city</span>
                   </ion-col>
@@ -91,9 +91,9 @@
 
 
                 <ion-col col-12>
-                    <ion-input type="text" name="pincode" formControlName="pincode"
-                        [ngClass]="displayFieldCss(signupForm,'pincode')" placeholder="Pincode"></ion-input>
-                    <span class="error-msg" *ngIf="isFieldValid(signupForm,'pincode')">Please enter a Pincode.</span>
+                    <ion-input type="text" name="pin_code" formControlName="pin_code"
+                        [ngClass]="displayFieldCss(signupForm,'pin_code')" placeholder="Pincode"></ion-input>
+                    <span class="error-msg" *ngIf="isFieldValid(signupForm,'pin_code')">Please enter a Pincode.</span>
                 </ion-col> 
 
             </ion-row>
