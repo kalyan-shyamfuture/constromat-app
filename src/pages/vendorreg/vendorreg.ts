@@ -43,7 +43,11 @@ export class VendorregPage {
     {id:8, type:"Contractors"},
     {id:9, type:"Others"}
     ]
-
+    product: any =[
+      {id:1, name:"Test1"},
+      {id:2, name:"Test2"},
+      {id:3, name:"Test3"},
+    ]
   constructor(
     public navCtrl: NavController, 
     public navParams: NavParams,
@@ -63,14 +67,20 @@ export class VendorregPage {
       website: ['',Validators.required],
       list_box: ['', Validators.required],
       gstin: ['', Validators.required],
+      pan_no: ['', Validators.required],
       turnover: ['',Validators.required],
+      product: ['',Validators.required],
       mobile: ['', Validators.required],
       email: ['', Validators.required],
       country: ['',Validators.required],
       state: ['',Validators.required],
       city: ['',Validators.required],
-      address: ['', Validators.required],
+      address1: ['', Validators.required],
+      address2: ['', Validators.required],
+      landmark: ['', Validators.required],
       pin_code: ['', Validators.required],
+      imp_doc: ['', Validators.required],
+      add_doc: ['', Validators.required], 
     
     });
   }
