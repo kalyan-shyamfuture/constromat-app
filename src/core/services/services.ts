@@ -235,6 +235,10 @@ export class ServicesProvider {
     return this.http.post(environment.apiEndpoint + 'userregister/', data, { headers: this.headers });
   }
 
+  getProductList(data) {
+    return this.http.post(environment.apiEndpoint + 'productslist/', data, { headers: this.headers });
+  }
+
 
 
 

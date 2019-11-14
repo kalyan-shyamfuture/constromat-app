@@ -30,9 +30,13 @@
               </ion-col>
     
               <ion-col col-12>
-                <ion-textarea type="text" name="list_box" formControlName="list_box" [ngClass]="displayFieldCss(vendorForm,'list_box')"
+                <!-- <ion-textarea type="text" name="list_box" formControlName="list_box" [ngClass]="displayFieldCss(vendorForm,'list_box')"
                 placeholder="list box"></ion-textarea>
-                 <span class="error-msg" *ngIf="isFieldValid(vendorForm,'list_box')">Please enter list box.</span>
+                 <span class="error-msg" *ngIf="isFieldValid(vendorForm,'list_box')">Please enter list box.</span> -->
+                 <ion-select col-12 interface="popover" placeholder="category" name="list_box" formControlName="list_box" [ngClass]="displayFieldCss(vendorForm,'list_box')" multiple="true" cancelText="cancel" okText="ok">
+                    <ion-option *ngFor="let category of categoryList">{{category.name}}</ion-option>
+                    <span class="error-msg" *ngIf="isFieldValid(vendorForm,'list_box')">Please enter list box.</span> -->
+                  </ion-select>
               </ion-col>
     
                  <ion-col col-12>
@@ -45,6 +49,12 @@
                        placeholder="GSTin"></ion-input>
                   <span class="error-msg" *ngIf="isFieldValid(vendorForm,'gstin')">Please enter GSTin</span>
               </ion-col>
+
+              <ion-col col-12>
+                <ion-input type="text" name="pan_no" formControlName="pan_no" [ngClass]="displayFieldCss(vendorForm,'pan_no')"
+                     placeholder="Pan no"></ion-input>
+                <span class="error-msg" *ngIf="isFieldValid(vendorForm,'pan_no')">Please enter Pan no</span>
+            </ion-col>
     
               <ion-col col-12>
                 <ion-select col-12 interface="alert" placeholder="Last Financial Year Turnover" name="turnover" formControlName="turnover" [ngClass]="displayFieldCss(vendorForm,'turnover')">
@@ -54,11 +64,15 @@
               </ion-col>
 
               <ion-col col-12>
-                <ion-select col-12 interface="alert" placeholder="product" name="product" formControlName="product" [ngClass]="displayFieldCss(vendorForm,'product')">
-                  <ion-option *ngFor="let productname of product">{{productname.name}}</ion-option>
+                 
+                <ion-select col-12 interface="popover" placeholder="product" name="product" formControlName="product" [ngClass]="displayFieldCss(vendorForm,'product')" multiple="true" cancelText="cancel" okText="ok">
+                  <ion-option *ngFor="let productname of allProduct" value="{{productname.id}}">{{productname.product_name}}</ion-option>
                 </ion-select>
                 <span class="error-msg" *ngIf="isFieldValid(vendorForm,'product')">Please select Product .</span>
               </ion-col>
+
+          
+
     
               <ion-col col-12>
                 <ion-input type="text" name="mobile" formControlName="mobile" [ngClass]="displayFieldCss(vendorForm,'mobile')"
@@ -92,6 +106,12 @@
                 </ion-select>
                 <span class="error-msg" *ngIf="isFieldValid(vendorForm,'city')">Please choose your city</span>
               </ion-col>
+
+              <ion-col col-12>
+                <ion-input type="text" name="pin_code" formControlName="pin_code" [ngClass]="displayFieldCss(vendorForm,'pin_code')"
+                    placeholder="Pincode"></ion-input>
+                <span class="error-msg" *ngIf="isFieldValid(vendorForm,'pin_code')">Please enter a pincode.</span>
+            </ion-col>
     
               <ion-col col-12>
                 <ion-input type="text" name="address1" formControlName="address1" [ngClass]="displayFieldCss(vendorForm,'address1')"
@@ -106,18 +126,18 @@
           </ion-col>
     
             <ion-col col-12>
-              <ion-input type="text" name="pin_code" formControlName="pin_code" [ngClass]="displayFieldCss(vendorForm,'pin_code')"
+              <ion-input type="text" name="landmark" formControlName="landmark" [ngClass]="displayFieldCss(vendorForm,'landmark')"
                   placeholder="Pincode"></ion-input>
-              <span class="error-msg" *ngIf="isFieldValid(vendorForm,'pin_code')">Please enter a pincode.</span>
+              <span class="error-msg" *ngIf="isFieldValid(vendorForm,'landmark')">Please enter a pincode.</span>
           </ion-col>
 
           <ion-col col-12>
-            <input type="file" formControlName="imp_doc" placeholder="Impdoc" [ngClass]="displayFieldCss(vendorForm,'imp_doc')"> 
+            <input type="file" (change)="impDoc($event)" formControlName="imp_doc" id="imp_doc" placeholder="Impdoc" [ngClass]="displayFieldCss(vendorForm,'imp_doc')"> 
           <span class="error-msg" *ngIf="isFieldValid(vendorForm,'imp_doc')">Please Attached Imp-doc</span>
       </ion-col>
   
       <ion-col col-12>
-          <input type="file" formControlName="add_doc" placeholder="add_doc" [ngClass]="displayFieldCss(vendorForm,'add_doc')"> 
+          <input type="file" (change)="addDoc($event)" formControlName="add_doc" id="add_doc" placeholder="add_doc" [ngClass]="displayFieldCss(vendorForm,'add_doc')"> 
         <span class="error-msg" *ngIf="isFieldValid(vendorForm,'add_doc')">Please Attached Add-doc</span>
     </ion-col>
   

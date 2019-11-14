@@ -28,6 +28,7 @@ export class HomePage {
   deviceId: any;
   loading: any;
   bannerList:any=[];
+  productList:any;
 
   public onlineOffline: boolean = navigator.onLine;
   constructor(
@@ -69,36 +70,17 @@ export class HomePage {
 
   getHomePageData() {
     var forkArray = [];
-    // var limit = 15;
-    // var pageno = 1;
+    var data = {
+      "product_id": "",
+    }
   
-    // var data = {
-    //   "cat_id": "",
-    //   "product_id": "",
-    //   "brand_id": "",
-    //   "user_id": this.user_id,
-    //   "device_token": this.deviceId
-    // }
-  
-    // var data1 = {
-    //   "cat_id": "",
-    //   "product_id": "",
-    //   "brand_id": "",
-    //   "user_id": this.user_id,
-    //   "device_token": this.deviceId
-    // }
+
    
   
     forkArray.push(this.sp.getBannerList())
-    // forkArray.push(this.sp.getCategoryList())
+    forkArray.push(this.sp.getProductList(data))
     // forkArray.push(this.sp.getTopStaples(limit, pageno, data))
-    // forkArray.push(this.sp.getDeliverSlotHome())
-    // forkArray.push(this.sp.getGeneralList())
-    // forkArray.push(this.sp.getCouponList())
-    // forkArray.push(this.sp.getBestSellingPro(data1))
-    // forkArray.push(this.sp.getCouponList())
-    
-  
+
     Observable.forkJoin(forkArray).subscribe(
       (result: any[]) => {
         console.log("Length==>",result.length);
@@ -109,51 +91,11 @@ export class HomePage {
             console.log("Banner List==>",this.bannerList);
           }
 
-          // if (i == 1) {
-          //   this.categoryList = result[i]['result'];
-          // }
-  
-          // if (i == 2) {
-          //   this.topProductList = result[i]['result']['data'];
-          //   this.topProductList.forEach((x, i) => {
-          //     var index = this.customer_cart_data.findIndex(y => y.product_id == x.id &&  y.unit_id == x.meta[0].unit_id);
-          //     if (index != -1) {
-          //       this.topProductList[i].meta[0].isCart = true;
-          //       this.topProductList[i].meta[0].quantity = this.customer_cart_data[index].quantity;
-          //     }
-          //     else {
-          //       this.topProductList[i].meta[0].isCart = false;
-          //       this.topProductList[i].meta[0].quantity = 0;
-          //     }
-          //   })
-          // }
-          // if (i == 3) {
-          //   this.deliveryList = result[i]['result'];
-          // }
-          // if (i == 4) {
-          //   this.generalList = result[i]['result'][0];
-          // this.generalListImage = result[i]['result'][0]['quality_gurantee_image'];
-          // }
-          // if (i == 5) {
-          //   this.couponBanner = result[i]['result'];
-          // }
-          // if (i == 6) {
-          //   this.bestSellingList = result[i]['result'];
-          //   this.bestSellingList.forEach((x, i) => {
-          //     if(x.length > 0) {
-          //       var index = this.customer_cart_data.findIndex(y => y.product_id == x[0].id && y.unit_id == x[0].meta[0].unit_id);
-          //     if (index != -1) {
-          //       this.bestSellingList[i][0].meta[0].isCart = true;
-          //       this.bestSellingList[i][0].meta[0].quantity = this.customer_cart_data[index].quantity;
-          //     }
-          //     else {
-          //       this.bestSellingList[i][0].meta[0].isCart = false;
-          //       this.bestSellingList[i][0].meta[0].quantity = 0;
-          //     }
-          //     }
-             
-          //   })
-          // }
+          if (i == 1) {
+            this.productList = result[i]['result']['data'];
+            console.log("Product List==>",this.productList);
+          }
+
           // if (i == 7) {
           //   this.couponBanner = result[i]['result'];
           // }
@@ -166,8 +108,6 @@ export class HomePage {
       }
     )
   }
-  
-
 
   getHeaderData() {
     this.events.publish(

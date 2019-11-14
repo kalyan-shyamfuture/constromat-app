@@ -258,14 +258,16 @@ ion-label {
 }
 
 .box-img {
+    background: #cccccc;
     position: relative;
     border-radius: 10px;
     overflow: hidden;
     height:180px;
 
     img {
-        height: 100%;
-        object-fit: cover;
+        width: 76%;
+        margin: 11px auto;
+        display: block;
     }
 
     button {
@@ -277,6 +279,25 @@ ion-label {
         span {
             font-size: 10px;
         }
+    }
+}
+
+
+.box-img2 {
+    background: #cccccc;
+    position: relative;
+    border-radius: 10px;
+    overflow: hidden;
+    height:180px;
+
+    .more-img {
+        position: absolute;
+        top: 60px;
+        text-align: center;
+        left: 60px;
+    }
+    h4 {
+        color:#9D1212;
     }
 }
 
@@ -413,4 +434,13 @@ ion-label {
 .login-segment .segment-button.segment-activated{
     background:#9D1212;
     color:#fff;
+}
+
+.profile-img {
+    height:90px !important;
+    width:90px !important;
+}
+
+.display-none {
+    display:none;
 }

@@ -27,58 +27,26 @@
          </ion-col>
       </ion-row>
       <ion-row>
-         <ion-col col-6>
+         <ion-col col-6 *ngFor="let product of productList | slice:0:5;  let i=index">
             <ion-label no-margin color="dark">
-               <p>Aggregates/ stone chips</p>
+               <p>{{product.product_name}}</p>
             </ion-label>
             <div class="box-img">
-               <img src="assets/imgs/stone.jpg" />
-               <button ion-button color="primary" block>Starting at : RS 59,130/Ton</button>
-            </div>
-         </ion-col>
-         <ion-col col-6>
-            <ion-label no-margin color="dark">
-               <p>Bricks</p>
-            </ion-label>
-            <div class="box-img">
-               <img src="assets/imgs/bricks.jpg" />
-               <button ion-button color="primary" block>Starting at : RS 59,130/Ton</button>
-            </div>
-         </ion-col>
-         <ion-col col-6>
-            <ion-label no-margin color="dark">
-               <p>Sand</p>
-            </ion-label>
-            <div class="box-img">
-               <img src="assets/imgs/sand.jpg" />
-               <button ion-button color="primary" block>Starting at : RS 59,130/Ton</button>
-            </div>
-         </ion-col>
-         <ion-col col-6>
-            <ion-label no-margin color="dark">
-               <p>Blocks</p>
-            </ion-label>
-            <div class="box-img">
-               <img src="assets/imgs/blocks.jpg" />
-               <button ion-button color="primary" block>Starting at : RS 59,130/Ton</button>
-            </div>
-         </ion-col>
-         <ion-col col-6>
-            <ion-label no-margin color="dark">
-               <p>Cement</p>
-            </ion-label>
-            <div class="box-img">
-               <img src="assets/imgs/cement.png" />
-               <button ion-button color="primary" block>Starting at : RS 59,130/Ton</button>
+               <img src="{{baseimg + product.product_icon}}" />
+               <button ion-button color="primary" block>Starting at : RS {{product.starting_at}}</button>
             </div>
          </ion-col>
          <ion-col col-6>
             <ion-label no-margin color="dark">
                <p>Test</p>
             </ion-label>
-            <div class="box-img">
-               <img src="assets/imgs/no-image.png" />
-               <button ion-button color="primary" block>Starting at : RS 59,130/Ton</button>
+            <div class="box-img2">
+               <div class="more-img" >
+                     <img src="assets/imgs/more-icon.png" />
+                     <h4  no-margin>More</h4>
+               </div>
+              
+             
             </div>
          </ion-col>
       </ion-row>
@@ -142,36 +110,13 @@
          <ion-col class="heading-border-line"><span></span></ion-col>
       </ion-row>
       <ion-row>
-         <ion-col col-12>
+         <ion-col col-12 *ngFor="let product of productList | slice:0:5;  let i=index">
             <div class="cat-img-full">
-               <img src="assets/imgs/stone.jpg" />
-               <div class="cat-title">Aggregates/ stone chips </div>
+               <img src="{{baseimg + product.product_image}}" />
+               <div class="cat-title">{{product.product_name}}</div>
             </div>
          </ion-col>
-         <ion-col col-12>
-            <div class="cat-img-full">
-               <img src="assets/imgs/sand.jpg" />
-               <div class="cat-title">Sand </div>
-            </div>
-         </ion-col>
-         <ion-col col-12>
-            <div class="cat-img-full">
-               <img src="assets/imgs/bricks.jpg" />
-               <div class="cat-title">Bricks </div>
-            </div>
-         </ion-col>
-         <ion-col col-12>
-            <div class="cat-img-full">
-               <img src="assets/imgs/blocks.jpg" />
-               <div class="cat-title">Blocks </div>
-            </div>
-         </ion-col>
-         <ion-col col-12>
-            <div class="cat-img-full">
-               <img src="assets/imgs/cement.png" />
-               <div class="cat-title">Cement </div>
-            </div>
-         </ion-col>
+       
       </ion-row>
 
    </div>

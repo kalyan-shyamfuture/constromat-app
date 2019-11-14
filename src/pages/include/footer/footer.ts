@@ -39,13 +39,13 @@ export class FooterPage {
   }
   gotoPage(routePage)
   {
-
-    if(this.isLoggedin ==true) {
-      this.navCtrl.push(routePage);
-    }
-    else {
-      this.navCtrl.push('LoginPage');
-    }
+    this.navCtrl.push(routePage);
+    // if(this.isLoggedin ==true) {
+    //   this.navCtrl.push(routePage);
+    // }
+    // else {
+    //   this.navCtrl.push('LoginPage');
+    // }
     
   }
 

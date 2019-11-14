@@ -14,14 +14,14 @@
                         [ngClass]="displayFieldCss(signupForm,'name')" placeholder="First Name"></ion-input>
                     <span class="error-msg" *ngIf="isFieldValid(signupForm,'name')">Please enter a Name.</span>
                 </ion-col>
-               <ion-col col-12>
+                <ion-col col-12>
                     <ion-input type="text" name="company_name" formControlName="company_name"
                         [ngClass]="displayFieldCss(signupForm,'company_name')" placeholder="Company Name"></ion-input>
                     <span class="error-msg" *ngIf="isFieldValid(signupForm,'company_name')">Please enter a Company
                         Name.</span>
                 </ion-col>
 
-                 <ion-col col-12>
+                <ion-col col-12>
                     <ion-input type="text" name="website" formControlName="website"
                         [ngClass]="displayFieldCss(signupForm,'website')" placeholder="Website"></ion-input>
                     <span class="error-msg" *ngIf="isFieldValid(signupForm,'website')">Please enter a Website.</span>
@@ -36,14 +36,16 @@
                         .</span>
                 </ion-col>
 
-               <ion-col col-12>
-                    <ion-select col-12 interface="alert" placeholder="Last Financial Year Turnover" name="turnover" formControlName="turnover" [ngClass]="displayFieldCss(signupForm,'turnover')">
-                      <ion-option *ngFor="let financial of financialTurnover">{{financial.price}}</ion-option>
+                <ion-col col-12>
+                    <ion-select col-12 interface="alert" placeholder="Last Financial Year Turnover" name="turnover"
+                        formControlName="turnover" [ngClass]="displayFieldCss(signupForm,'turnover')">
+                        <ion-option *ngFor="let financial of financialTurnover">{{financial.price}}</ion-option>
                     </ion-select>
-                    <span class="error-msg" *ngIf="isFieldValid(signupForm,'turnover')">Please select last financial year turnover .</span>
-                  </ion-col>
+                    <span class="error-msg" *ngIf="isFieldValid(signupForm,'turnover')">Please select last financial
+                        year turnover .</span>
+                </ion-col>
 
- 
+
                 <ion-col col-12>
                     <ion-input type="password" name="password" formControlName="password"
                         [ngClass]="displayFieldCss(signupForm,'password')" placeholder="Password"></ion-input>
@@ -63,27 +65,31 @@
                 </ion-col>
 
                 <ion-col col-12>
-                    <ion-select  (ionChange)="getStateValues($event)" col-12 interface="alert" placeholder="Country" name="country" formControlName="country" [ngClass]="displayFieldCss(signupForm,'country')">
-                      <ion-option  *ngFor="let c of countryList" value="{{c.id}}">{{c.name}}</ion-option>
+                    <ion-select (ionChange)="getStateValues($event)" col-12 interface="alert" placeholder="Country"
+                        name="country" formControlName="country" [ngClass]="displayFieldCss(signupForm,'country')">
+                        <ion-option *ngFor="let c of countryList" value="{{c.id}}">{{c.name}}</ion-option>
                     </ion-select>
-                    <span class="error-msg" *ngIf="isFieldValid(signupForm,'country')">Please choose your country .</span>
-                  </ion-col>
-        
-                  <ion-col col-12>
-                    <ion-select (ionChange)="getCityValues($event)" col-12 interface="alert" placeholder="State" name="state" formControlName="state" [ngClass]="displayFieldCss(signupForm,'state')">
-                      <ion-option *ngFor="let state of stateList" value="{{state.id}}">{{state.name}}</ion-option>
+                    <span class="error-msg" *ngIf="isFieldValid(signupForm,'country')">Please choose your country
+                        .</span>
+                </ion-col>
+
+                <ion-col col-12>
+                    <ion-select (ionChange)="getCityValues($event)" col-12 interface="alert" placeholder="State"
+                        name="state" formControlName="state" [ngClass]="displayFieldCss(signupForm,'state')">
+                        <ion-option *ngFor="let state of stateList" value="{{state.id}}">{{state.name}}</ion-option>
                     </ion-select>
                     <span class="error-msg" *ngIf="isFieldValid(signupForm,'state')">Please choose your state.</span>
-                  </ion-col>
-        
-                  <ion-col col-12>
-                    <ion-select col-12 interface="alert" placeholder="City" name="city" formControlName="city" [ngClass]="displayFieldCss(signupForm,'city')">
-                      <ion-option *ngFor="let city of cityList" value="{{city.id}}">{{city.name}}</ion-option>
+                </ion-col>
+
+                <ion-col col-12>
+                    <ion-select col-12 interface="alert" placeholder="City" name="city" formControlName="city"
+                        [ngClass]="displayFieldCss(signupForm,'city')">
+                        <ion-option *ngFor="let city of cityList" value="{{city.id}}">{{city.name}}</ion-option>
                     </ion-select>
                     <span class="error-msg" *ngIf="isFieldValid(signupForm,'city')">Please choose your city</span>
-                  </ion-col>
+                </ion-col>
 
-                  <ion-col col-12>
+                <ion-col col-12>
                     <ion-input type="text" name="address" formControlName="address"
                         [ngClass]="displayFieldCss(signupForm,'address')" placeholder="Address"></ion-input>
                     <span class="error-msg" *ngIf="isFieldValid(signupForm,'address')">Please enter a Address.</span>
@@ -94,7 +100,27 @@
                     <ion-input type="text" name="pin_code" formControlName="pin_code"
                         [ngClass]="displayFieldCss(signupForm,'pin_code')" placeholder="Pincode"></ion-input>
                     <span class="error-msg" *ngIf="isFieldValid(signupForm,'pin_code')">Please enter a Pincode.</span>
-                </ion-col> 
+                </ion-col>
+                <ion-col col-12>
+                    <input type="file" (change)="addPurchaseDoc($event)" formControlName="purchase_doc" id="purchase_doc"
+                        placeholder="purchase_doc" [ngClass]="displayFieldCss(signupForm,'purchase_doc')">
+                    <span class="error-msg" *ngIf="isFieldValid(signupForm,'purchase_doc')">Please Attached Purchase Document</span>
+                </ion-col>
+                <ion-col col-12>
+                    <input type="file" (change)="addTradeDoc($event)" formControlName="trade_doc" id="trade_doc"
+                        placeholder="trade_doc" [ngClass]="displayFieldCss(signupForm,'trade_doc')">
+                    <span class="error-msg" *ngIf="isFieldValid(signupForm,'trade_doc')">Please Attached Trade Document</span>
+                </ion-col>
+                <ion-col col-12>
+                    <input type="file" (change)="addGstDoc($event)" formControlName="gst_doc" id="gst_doc"
+                        placeholder="gst_doc" [ngClass]="displayFieldCss(signupForm,'gst_doc')">
+                    <span class="error-msg" *ngIf="isFieldValid(signupForm,'gst_doc')">Please Attached GST Document</span>
+                </ion-col>
+                <ion-col col-12>
+                    <input type="file" (change)="addDoc($event)" formControlName="add_doc" id="add_doc"
+                        placeholder="add_doc" [ngClass]="displayFieldCss(signupForm,'add_doc')">
+                    <span class="error-msg" *ngIf="isFieldValid(signupForm,'add_doc')">Please Attached Add-doc</span>
+                </ion-col>
 
             </ion-row>
             <ion-row responsive-sm class="entry-bottom">

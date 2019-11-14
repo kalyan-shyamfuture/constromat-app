@@ -62,34 +62,29 @@ export class ProfileeditPage {
 
   ionViewDidLoad() {
     this.menuCtrl.close();
-    this.events.publish(
-      "headerData",{
-        "mainHeader":true,
-        "subHeader":false
-      }
-    );
+    this.getHeaderData();
     this.getUserDetails(this.userId);
   }
   getUserDetails(id) {
     this.sp.getUserDetails(id).subscribe(
       res => {  
-        this.userDetails = res['result'];
-        if(this.userDetails.is_email_verified ==1) {
-          this.isReadOnly = true;
-        }
-        else {
-          this.isReadOnly = false;
-        }
-        if(!this.userDetails.gender) {
-          this.userDetails.gender ="";
-        }
-        this.profileForm.patchValue({
-          gender: this.userDetails.gender,
-          name: this.userDetails.name,
-          email: this.userDetails.email,
-          city: this.userDetails.city,
-          dob: this.userDetails.dob
-        })
+        // this.userDetails = res['result'];
+        // if(this.userDetails.is_email_verified ==1) {
+        //   this.isReadOnly = true;
+        // }
+        // else {
+        //   this.isReadOnly = false;
+        // }
+        // if(!this.userDetails.gender) {
+        //   this.userDetails.gender ="";
+        // }
+        // this.profileForm.patchValue({
+        //   gender: this.userDetails.gender,
+        //   name: this.userDetails.name,
+        //   email: this.userDetails.email,
+        //   city: this.userDetails.city,
+        //   dob: this.userDetails.dob
+        // })
       },
       error => {
       }
@@ -150,5 +145,17 @@ export class ProfileeditPage {
     });
     toast.present();
   }
+
+  getHeaderData() {
+    this.events.publish(
+      "headerData",{
+        "isHeaderHidden": false,
+        "isSubHeaderHidden":false,
+        "hideBackButton": true,
+        "title":" Welcome to Constromat"
+      }
+    );
+  }
+
 
 }

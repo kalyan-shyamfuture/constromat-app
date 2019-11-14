@@ -19,7 +19,18 @@ import { ServicesProvider } from '../../core/services/services';
 })
 export class EnquirePage {
   enquireForm: FormGroup;
-
+  allProduct:any=[];
+  business_type: any = [
+    { id: 1, type: "Construction Company" },
+    { id: 2, type: "Imfrastructure" },
+    { id: 3, type: "Goverment" },
+    { id: 4, type: "Organization" },
+    { id: 5, type: "Builders" },
+    { id: 6, type: "RMC" },
+    { id: 7, type: "Manufacturer of construction product" },
+    { id: 8, type: "Contractors" },
+    { id: 9, type: "Others" }
+  ]
   constructor(
     public navCtrl: NavController,
     public navParams: NavParams,
@@ -32,18 +43,18 @@ export class EnquirePage {
     public sp:ServicesProvider,
   ) {
     this.getHeaderData();
-
+    this.productslist();
 
     this.enquireForm = this.formBuilder.group({
-      name: ['', Validators.required],
-      mobile: ['', Validators.required],
-      email: ['', Validators.required],
-      organization: ['', Validators.required],
-      productname: ['', Validators.required],
-      qty: ['', Validators.required],
-      unit: ['', Validators.required],
-      deliverylocation:['', Validators.required],
-      remarks:['', Validators.required],
+      user_name: ['', Validators.required],
+      user_phone: ['', Validators.required],
+      user_email: ['', Validators.required],
+      user_org_type: ['', Validators.required],
+      user_delivery_location: ['', Validators.required],
+      user_quote: ['', Validators.required],
+      user_product: ['', Validators.required],
+      user_project_qty:['', Validators.required],
+      user_project_unit:['', Validators.required],
     });
 
   }
@@ -56,6 +67,24 @@ export class EnquirePage {
 
   ionViewDidEnter() {
     this.getHeaderData();
+  }
+
+  productslist()
+  {
+    var data = {
+      "product_id":""
+    } 
+    this.sp.getProductList(data).subscribe(
+      res => {
+        console.log(res);
+        if (res['status']) {
+          this.allProduct = res['result']['data'];
+        }
+      },
+      error => {
+      }
+    )
+
   }
 
 
@@ -93,14 +122,14 @@ export class EnquirePage {
     });
   }
 
-  isFieldValid(field: string) {
-    return !this.enquireForm.get(field).valid && (this.enquireForm.get(field).dirty || this.enquireForm.get(field).touched);
+  isFieldValid(form: FormGroup, field: string) {
+    return !form.get(field).valid && (form.get(field).dirty || form.get(field).touched);
   }
 
-  displayFieldCss(field: string) {
+  displayFieldCss(form: FormGroup, field: string) {
     return {
-      'is-invalid': this.enquireForm.get(field).invalid && (this.enquireForm.get(field).dirty || this.enquireForm.get(field).touched),
-      'is-valid': this.enquireForm.get(field).valid && (this.enquireForm.get(field).dirty || this.enquireForm.get(field).touched)
+      'is-invalid': form.get(field).invalid && (form.get(field).dirty || form.get(field).touched),
+      'is-valid': form.get(field).valid && (form.get(field).dirty || form.get(field).touched)
     };
   }
 

@@ -27,8 +27,11 @@
             <ion-segment-button value="EnquirePage">
                 Enquire Now
             </ion-segment-button>
-            <ion-segment-button value="LoginPage">
+            <ion-segment-button value="LoginPage" [class.display-none]="isLoggedin">
                 Login
+            </ion-segment-button>
+            <ion-segment-button value="ProfileeditPage" [class.display-none]="!isLoggedin">
+                Profile
             </ion-segment-button>
             <ion-segment-button value="ContactPage">
                 Contact
@@ -42,9 +45,10 @@
 <ion-menu [content]="mycontent" swipeEnabled="false">
         <ion-content class="menu-nav app-html">
             <ion-item>
-                <h2>{{logged_user_name}}
+                <h2>
                     <span (click)="menuClose()" class="arrow-forward">
-                        <ion-icon ios="ios-arrow-forward" md="md-arrow-forward"></ion-icon>
+                        <!-- <ion-icon ios="ios-arrow-forward" md="md-arrow-forward"></ion-icon> -->
+                        <ion-icon ios="ios-arrow-round-back" md="md-arrow-round-back"></ion-icon>
                     </span>
                 </h2>
             </ion-item>
@@ -54,12 +58,15 @@
                     <div class="nav-bar-text">
                         <ion-item no-padding text-center class="sidebar-avatar">
                             <ion-avatar text-center>
-                                <img src="assets/imgs/logo.png">
+                                <img *ngIf="isLoggedin" class="profile-img" src="{{baseimg + logged_user_image}}">
+                                <img *ngIf="!isLoggedin" class="profile-img" src="assets/imgs/logo.png">
                             </ion-avatar>
-                            <h2>{{logged_user_name}}
-                            </h2>
-                            <p>Test User</p>
+                            <h2 *ngIf="isLoggedin">{{logged_user_name}}</h2>
+                            <h2 *ngIf="!isLoggedin">Guest</h2>
                         </ion-item>
+                        <button *ngIf="isLoggedin" ion-button icon-only class="basket-img" round (click)="logOut()">
+                            Logout
+                        </button>
                     </div>
     
                 </ion-row>
@@ -77,28 +84,28 @@
                         </button>
                     </ion-col>
                     <ion-col col-12>
-                        <button class="orders-text" ion-item (click)="gotoCmsPage(3)">
+                        <button class="orders-text" ion-item (click)="openPage()">
                             <div class="nav-bar-text">
                                 About Us
                             </div>
                         </button>
                     </ion-col>
                     <ion-col col-12>
-                        <button class="orders-text" ion-item (click)="gotoCmsPage(4)">
+                        <button class="orders-text" ion-item (click)="openPage('http://166.62.54.122/constromat/terms-condition')">
                             <div class="nav-bar-text">
                                 Terms & Conditions
                             </div>
                         </button>
                     </ion-col>
                     <ion-col col-12>
-                        <button class="orders-text" ion-item (click)="gotoCmsPage(9)">
+                        <button class="orders-text" ion-item (click)="openPage('http://166.62.54.122/constromat/privacy-policy')">
                             <div class="nav-bar-text">
                                 Privacy Policy
                             </div>
                         </button>
                     </ion-col>
                     <ion-col col-12>
-                        <button class="orders-text" ion-item (click)="gotoPage('FaqPage')">
+                        <button class="orders-text" ion-item (click)="openPage('http://166.62.54.122/constromat/faq')">
                             <div class="nav-bar-text">
                                 FAQ?
                             </div>

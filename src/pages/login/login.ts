@@ -98,6 +98,7 @@ export class LoginPage {
             localStorage.setItem('logged_user_email', res['result']['detail']['email']);
             localStorage.setItem('logged_user_contact_no', res['result']['detail']['phone']);
             localStorage.setItem('logged_user_id', res['result']['detail']['id']);
+            localStorage.setItem('logged_user_image',  res['result']['detail']['profile_image']);
             localStorage.setItem('isLoggedin', 'true')
             this.sp.loginStatus(true);
                this.navCtrl.setRoot('HomePage');
@@ -139,6 +140,8 @@ export class LoginPage {
             localStorage.setItem('logged_user_email',  this.getDetails['email']);
             localStorage.setItem('logged_user_contact_no',  this.getDetails['phone']);
             localStorage.setItem('logged_user_id',  this.getDetails['id']);
+            localStorage.setItem('logged_user_image',  this.getDetails['profile_image']);
+            
             localStorage.setItem('isLoggedin', 'true')
             this.sp.loginStatus(true);
                this.navCtrl.setRoot('HomePage');

@@ -12,57 +12,71 @@
             <ion-row>
 
                 <ion-col col-12>
-                    <ion-input type="text" name="name" formControlName="name" [ngClass]="displayFieldCss('name')"
+                    <ion-input type="text" name="user_name" formControlName="user_name" [ngClass]="displayFieldCss(enquireForm,'user_name')"
                         placeholder="Name"></ion-input>
-                    <span class="error-msg" *ngIf="isFieldValid('name')">Please enter a valid Name.</span>
+                    <span class="error-msg" *ngIf="isFieldValid(enquireForm,'user_name')">Please enter a valid Name.</span>
                 </ion-col>
 
                 <ion-col col-12>
-                    <ion-input type="text" name="mobile" formControlName="mobile" [ngClass]="displayFieldCss('mobile')"
+                    <ion-input type="text" name="user_phone" formControlName="user_phone" [ngClass]="displayFieldCss(enquireForm,'user_phone')"
                         placeholder="Mobile"></ion-input>
-                    <span class="error-msg" *ngIf="isFieldValid('mobile')">Please enter a mobile.</span>
+                    <span class="error-msg" *ngIf="isFieldValid(enquireForm,'user_phone')">Please enter a mobile.</span>
                 </ion-col>
 
                 <ion-col col-12>
-                    <ion-input type="email" name="email" formControlName="email" [ngClass]="displayFieldCss('email')"
+                    <ion-input type="email" name="user_email" formControlName="user_email" [ngClass]="displayFieldCss(enquireForm,'user_email')"
                         placeholder="Email"></ion-input>
-                    <span class="error-msg" *ngIf="isFieldValid('email')">Please enter a valid Email.</span>
+                    <span class="error-msg" *ngIf="isFieldValid(enquireForm,'user_email')">Please enter a valid Email.</span>
                 </ion-col>
 
 
-                <ion-col col-12>
-                    <ion-input type="text" name="organization" formControlName="organization"
-                        [ngClass]="displayFieldCss('organization')" placeholder="Organization"></ion-input>
-                    <span class="error-msg" *ngIf="isFieldValid('organization')">Please enter a valid
+                <!-- <ion-col col-12>
+                    <ion-input type="text" name="user_org_type" formControlName="user_org_type"
+                        [ngClass]="displayFieldCss(enquireForm,'user_org_type')" placeholder="Organization"></ion-input>
+                    <span class="error-msg" *ngIf="isFieldValid(enquireForm,'user_org_type')">Please enter a valid
                         organization.</span>
-                </ion-col>
+                </ion-col> -->
                 <ion-col col-12>
-                    <ion-input type="text" name="productname" formControlName="productname"
-                        [ngClass]="displayFieldCss('productname')" placeholder="Product Name"></ion-input>
-                    <span class="error-msg" *ngIf="isFieldValid('productname')">Please enter a valid productname.</span>
+                        <ion-select col-12 interface="alert" placeholder="business Type" name="user_org_type" formControlName="user_org_type" [ngClass]="displayFieldCss(enquireForm,'user_org_type')">
+                          <ion-option *ngFor="let businessMode of business_type">{{businessMode.type}}</ion-option>
+                        </ion-select>
+                        <span class="error-msg" *ngIf="isFieldValid(enquireForm,'user_org_type')">Please enter business type .</span>
+                      </ion-col>
+                <ion-col col-12>
+                    <ion-input type="text" name="user_delivery_location" formControlName="user_delivery_location"
+                        [ngClass]="displayFieldCss(enquireForm,'user_delivery_location')" placeholder="Product Name"></ion-input>
+                    <span class="error-msg" *ngIf="isFieldValid(enquireForm,'user_delivery_location')">Please enter a valid productname.</span>
                 </ion-col>
 
                 <ion-col col-12>
-                    <ion-input type="text" name="qty" formControlName="qty" [ngClass]="displayFieldCss('qty')"
+                    <ion-input type="text" name="user_quote" formControlName="user_quote" [ngClass]="displayFieldCss(enquireForm,'user_quote')"
                         placeholder="Quantity"></ion-input>
-                    <span class="error-msg" *ngIf="isFieldValid('qty')">Please enter a valid Quantity.</span>
+                    <span class="error-msg" *ngIf="isFieldValid(enquireForm,'user_quote')">Please enter a valid Quantity.</span>
                 </ion-col>
-                <ion-col col-12>
-                    <ion-input type="text" name="unit" formControlName="unit" [ngClass]="displayFieldCss('unit')"
+                <!-- <ion-col col-12>
+                    <ion-input type="text" name="user_product" formControlName="user_product" [ngClass]="displayFieldCss(enquireForm,'user_product')"
                         placeholder="Unit"></ion-input>
-                    <span class="error-msg" *ngIf="isFieldValid('unit')">Please enter a valid Unit.</span>
-                </ion-col>
+                    <span class="error-msg" *ngIf="isFieldValid(enquireForm,'user_product')">Please enter a valid Unit.</span>
+                </ion-col> -->
 
                 <ion-col col-12>
-                        <ion-input type="text" name="deliverylocation" formControlName="deliverylocation" [ngClass]="displayFieldCss('deliverylocation')"
+                 
+                        <ion-select col-12 interface="popover" placeholder="product" name="user_product" formControlName="user_product" [ngClass]="displayFieldCss(enquireForm,'user_product')" multiple="true" cancelText="cancel" okText="ok">
+                          <ion-option *ngFor="let productname of allProduct" value="{{productname.id}}">{{productname.product_name}}</ion-option>
+                        </ion-select>
+                        <span class="error-msg" *ngIf="isFieldValid(enquireForm,'user_product')">Please select Product .</span>
+                      </ion-col>
+
+                <ion-col col-12>
+                        <ion-input type="text" name="user_project_qty" formControlName="user_project_qty" [ngClass]="displayFieldCss(enquireForm,'user_project_qty')"
                             placeholder="Delivery Location"></ion-input>
-                        <span class="error-msg" *ngIf="isFieldValid('deliverylocation')">Please enter a valid Delivery Location.</span>
+                        <span class="error-msg" *ngIf="isFieldValid(enquireForm,'user_project_qty')">Please enter a valid Delivery Location.</span>
                 </ion-col>
 
                 <ion-col col-12>
-                        <ion-input type="text" name="remarks" formControlName="remarks" [ngClass]="displayFieldCss('remarks')"
+                        <ion-input type="text" name="user_project_unit" formControlName="user_project_unit" [ngClass]="displayFieldCss(enquireForm,'user_project_unit')"
                             placeholder="Remarks"></ion-input>
-                        <span class="error-msg" *ngIf="isFieldValid('remarks')">Please enter a valid Remarks.</span>
+                        <span class="error-msg" *ngIf="isFieldValid(enquireForm,'user_project_unit')">Please enter a valid Remarks.</span>
                 </ion-col>
 
 

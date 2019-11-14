@@ -5,6 +5,7 @@ import { SplashScreen } from '@ionic-native/splash-screen';
 import { Device } from '@ionic-native/device';
 import { environment } from '../core/global';
 import { ServicesProvider } from '../core/services/services';
+import { InAppBrowser,InAppBrowserOptions } from '@ionic-native/in-app-browser';
 
 declare var google: any;
 @Component({
@@ -36,6 +37,7 @@ export class MyApp {
   deliveryList: any = [];
   faqList: any = [];
   customsegment:string="HomePage";
+  logged_user_image:any;
 
   constructor(
     public platform: Platform,
@@ -47,6 +49,7 @@ export class MyApp {
     private device: Device,
     public sp: ServicesProvider,
     public menuCtrl: MenuController,
+    public inAppBrowser:InAppBrowser
   ) {
     //this.initializeApp();
     this.platform.ready().then(() => {
@@ -56,9 +59,11 @@ export class MyApp {
       this.deviceId = localStorage.setItem('deviceId', this.device.uuid);
      // this.nav.setRoot('HomePage');
       if (localStorage.getItem('isLoggedin')) {
+        this.loadUserInfo();
         this.nav.setRoot('HomePage');
       }
       else {
+        this.loadUserInfo();
         this.nav.setRoot('AftersplashPage');
       }
       this.statusBar.styleDefault();
@@ -93,6 +98,7 @@ export class MyApp {
       this.logged_user_email = localStorage.getItem('logged_user_email');
       this.logged_user_contact_no = localStorage.getItem('logged_user_contact_no');
       this.logged_user_id = localStorage.getItem('logged_user_id');
+      this.logged_user_image = localStorage.getItem('logged_user_image');
     }
     else {
       this.isLoggedin = false;
@@ -100,6 +106,7 @@ export class MyApp {
       this.logged_user_email = "";
       this.logged_user_contact_no = "";
       this.logged_user_id = "";
+      this.logged_user_image ="";
     }
     if (localStorage.getItem("cart")) {
       this.totalCart = JSON.parse(localStorage.getItem("cart")).length;
@@ -135,9 +142,9 @@ export class MyApp {
   //   }
   // }
 
-  openPage(page) {
-    this.nav.setRoot(page.component);
-  }
+  // openPage(page) {
+  //   this.nav.setRoot(page.component);
+  // }
 
   gotoPage(routePage) {
     this.nav.push(routePage);
@@ -212,6 +219,16 @@ export class MyApp {
     console.log(event.value);
     this.nav.setRoot(event.value);
   }
+
+  openPage(page) {
+    const options: InAppBrowserOptions = {
+      toolbar: 'no',
+      location: 'no',
+      zoom: 'no'
+  }
+    const browser = this.inAppBrowser.create(page, '_self', options);
+  }
+  
   
 
   presentToast(msg) {
