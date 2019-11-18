@@ -39,7 +39,7 @@ export class WhyusPage {
     this.events.publish(
       "headerData",{
         "isHeaderHidden": false,
-        "isSubHeaderHidden":false,
+        "isSubHeaderHidden":true,
         "hideBackButton": true,
         "title":" Welcome to Constromat"
       }

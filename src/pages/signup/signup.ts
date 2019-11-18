@@ -62,12 +62,12 @@ export class SignupPage {
     public menuCtrl: MenuController,
     public sp:ServicesProvider
   ) {
-    this.events.publish(
-      "headerData",{
-        "mainHeader":true,
-        "subHeader":false
-      }
-    );
+    // this.events.publish(
+    //   "headerData",{
+    //     "mainHeader":true,
+    //     "subHeader":false
+    //   }
+    // );
 
     this.signupForm = this.formBuilder.group({
       name: ['', Validators.required],

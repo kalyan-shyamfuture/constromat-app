@@ -1,0 +1,32 @@
+<!--
+  Generated template for the EnquirydetailsPage page.
+
+  See http://ionicframework.com/docs/components/#navigation for more info on
+  Ionic pages and navigation.
+-->
+<!-- <ion-header>
+
+  <ion-navbar>
+    <ion-title>enquirydetails</ion-title>
+  </ion-navbar>
+
+</ion-header> -->
+
+
+<ion-content padding>
+    <ion-card *ngFor="let qDetails of qryDetails let i=index">
+
+        <ion-card-header>
+         {{qDetails.product_name}}
+        </ion-card-header>
+      
+        <ion-card-content>
+          <h3>{{qDetails.type_name}}</h3>
+          <p>{{qDetails.unit_name}}</p>
+          <p>{{qDetails.unit_rate}}</p>
+          <p>{{qDetails.total_rate}}</p>
+        
+        </ion-card-content>
+      
+      </ion-card>
+</ion-content>

@@ -31,20 +31,10 @@ export class LoginPage {
   customer_cart_data: any = [];
   isOtpShow:number;
   getOtp:any;
-  opt1:any ="";
-  opt2:any ="";
-  opt3:any ="";
-  opt4:any ="";
-
   typeOtp:any;
   mobileNo:any;
   userDetails:any;
   otpStatus:any;
-
-  otp1:any ="";
-  otp2:any ="";
-  otp3:any ="";
-  otp4:any ="";
 
   constructor(
     public navCtrl: NavController,
@@ -75,7 +65,6 @@ export class LoginPage {
 
   ionViewDidLoad() {
     this.menuCtrl.close();
-   // this.menuCtrl.enable(false);
    this.getHeaderData();
   }
 
@@ -103,6 +92,9 @@ export class LoginPage {
             this.sp.loginStatus(true);
                this.navCtrl.setRoot('HomePage');
         }
+        else {
+          this.presentToast(res['result'].message);
+        }
       },
       error => {
         this.presentToast("Error!!!!");
@@ -119,9 +111,12 @@ export class LoginPage {
         if(res['status']) {
           this.showOtp =true;
           this.getOtp = res['result']['otp'];
-          this.getDetails = res['result']['detail'];
+          this.getDetails = res['result']['detail'][0];
           console.log(this.getOtp);
           this.presentToast("OTP - "+this.getOtp);
+        }
+        else {
+          this.presentToast(res['result']['message']);
         }
       },
       error => {
@@ -135,7 +130,7 @@ export class LoginPage {
     this.newOtp = this.otpForm.value.otp;
     if(this.newOtp == this.getOtp) {
       console.log("OTP matched!!");
-
+console.log("Get Details==>",this.getDetails);
       localStorage.setItem('logged_user_name',  this.getDetails['name']);
             localStorage.setItem('logged_user_email',  this.getDetails['email']);
             localStorage.setItem('logged_user_contact_no',  this.getDetails['phone']);

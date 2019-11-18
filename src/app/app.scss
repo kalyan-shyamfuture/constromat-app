@@ -444,3 +444,13 @@ ion-label {
 .display-none {
     display:none;
 }
+
+ion-input, ion-textarea {
+    border-bottom: 1px solid #ccc;
+}
+
+.add-more {
+    color: #9D1212;
+    float: right;
+    font-size: 30px;
+}

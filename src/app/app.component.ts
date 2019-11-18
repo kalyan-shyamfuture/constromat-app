@@ -27,7 +27,7 @@ export class MyApp {
   logged_user_name: any;
   logged_user_contact_no: any
   logged_user_email: any;
-  isLoggedin: boolean;
+  isLoggedin: any;
   isHeaderHidden: any;
   fetchedAddress: any;
   arrayCount: number;
@@ -92,8 +92,9 @@ export class MyApp {
   }
 
   loadUserInfo() {
+    console.log("IsLoggedin==>",localStorage.getItem('isLoggedin'));
     if (localStorage.getItem('isLoggedin')) {
-      this.isLoggedin = true;
+      this.isLoggedin = localStorage.getItem('isLoggedin');
       this.logged_user_name = localStorage.getItem('logged_user_name');
       this.logged_user_email = localStorage.getItem('logged_user_email');
       this.logged_user_contact_no = localStorage.getItem('logged_user_contact_no');

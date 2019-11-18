@@ -73,6 +73,8 @@ export class HomePage {
     var data = {
       "product_id": "",
     }
+
+
   
 
    
@@ -107,6 +109,10 @@ export class HomePage {
         // });
       }
     )
+  }
+
+  gotoPage(page) {
+    this.navCtrl.setRoot(page);
   }
 
   getHeaderData() {

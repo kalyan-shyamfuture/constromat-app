@@ -108,9 +108,7 @@ export class ServicesProvider {
     return this.http.get(environment.apiEndpoint + 'cusaddlistbycusid/' + id, { headers: this.headers });
   }
 
-  getUserDetails(id) {
-    return this.http.get(environment.apiEndpoint + 'userprofile/' + id, { headers: this.headers });
-  }
+  
 
   addOrder(str) {
     return this.http.post(environment.apiEndpoint + 'addorder/', str, { headers: this.headers });
@@ -237,6 +235,22 @@ export class ServicesProvider {
 
   getProductList(data) {
     return this.http.post(environment.apiEndpoint + 'productslist/', data, { headers: this.headers });
+  }
+
+  addEnquiry(data) {
+    return this.http.post(environment.apiEndpoint + 'newuserenquiry/', data, { headers: this.headers });
+  }
+
+  listQuery(data) {
+    return this.http.post(environment.apiEndpoint + 'enquirylist/', data, { headers: this.headers });
+  }
+
+  getUserDetails(id) {
+    return this.http.get(environment.apiEndpoint + 'userprofile/' + id, { headers: this.headers });
+  }
+
+  requestChangePassword(id,data) {
+    return this.http.post(environment.apiEndpoint + 'userchangepassword/'+id, data, { headers: this.headers });
   }
 
 

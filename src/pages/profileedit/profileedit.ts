@@ -42,13 +42,9 @@ export class ProfileeditPage {
     ) {
       if (localStorage.getItem('isLoggedin')) {
         this.userId = localStorage.getItem('logged_user_id');
-        this.isLoggedin = true;
-        this.deviceId = "";
       }
       else {
         this.userId = '';
-        this.isLoggedin = false;
-        this.deviceId = localStorage.getItem('deviceId');
       }
 
       this.profileForm = this.formBuilder.group({
@@ -68,16 +64,8 @@ export class ProfileeditPage {
   getUserDetails(id) {
     this.sp.getUserDetails(id).subscribe(
       res => {  
-        // this.userDetails = res['result'];
-        // if(this.userDetails.is_email_verified ==1) {
-        //   this.isReadOnly = true;
-        // }
-        // else {
-        //   this.isReadOnly = false;
-        // }
-        // if(!this.userDetails.gender) {
-        //   this.userDetails.gender ="";
-        // }
+        this.userDetails = res['result'];
+          console.log(this.userDetails);
         // this.profileForm.patchValue({
         //   gender: this.userDetails.gender,
         //   name: this.userDetails.name,

@@ -5,7 +5,7 @@ import { ServicesProvider } from '../../core/services/services';
 import { environment } from '../../core/global';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { Keyboard } from '@ionic-native/keyboard';
-
+import { trigger, state, style, transition, animate } from '@angular/animations';
 /**
  * Generated class for the HomePage page.
  *
@@ -18,9 +18,110 @@ import { Keyboard } from '@ionic-native/keyboard';
 @Component({
   selector: 'page-productlist',
   templateUrl: 'productlist.html',
+  animations: [
+    trigger('expandCollapse', [
+      state('open', style({
+        height: '*',
+        margin: '*',
+        padding: '*',
+        visibility: 'visible',
+        opacity: '1'
+      })),
+      state('close', style({
+        height: '0px',
+        margin: '0px',
+        padding: '0px',
+        visibility: 'hidden',
+        opacity: '0'
+      })),
+      transition('open <=> close', animate(200))
+    ])
+  ]
 })
 export class ProductlistPage {
   baseimg: any = environment.imageBaseUrl;
+  allProduct:any=[];
+  // public appMenus = [
+  //   {
+  //     sectionName: 'ACCOUNT',
+  //     showAfterLogin: false,
+  //     sectionItems: [
+  //       {
+  //         title: 'Login',
+  //         url: '/login',
+  //         icon: 'log-in'
+  //       },
+  //       {
+  //         title: 'Register',
+  //         url: '/register',
+  //         icon: 'person-add'
+  //       },
+  //     ]
+  //   },
+  //   {
+  //     sectionName: 'MENUS',
+  //     showAfterLogin: true,
+  //     sectionItems: [
+  //       {
+  //         title: 'Home',
+  //         url: '/user-tab/home',
+  //         icon: 'home'
+  //       },
+  //       {
+  //         title: 'Product',
+  //         url: '/user-tab/product',
+  //         icon: 'notifications'
+  //       },
+  //       {
+  //         title: 'Menu',
+  //         url: '/user/menu',
+  //         icon: 'menu',
+  //         state: 'close',
+  //         subMenus: [
+  //           {
+  //             title: 'Sub Menu 1',
+  //             url: '/user/notification',
+  //             icon: 'notifications'
+  //           },
+  //           {
+  //             title: 'Sub Menu 2',
+  //             url: '/user/notification',
+  //             icon: 'notifications',
+  //             state: 'close',
+  //             subSubMenus: [
+  //               {
+  //                 title: 'Sub Sub Menu 1',
+  //                 url: '/user/notification',
+  //                 icon: 'notifications'
+  //               },
+  //               {
+  //                 title: 'Sub Sub Menu 2',
+  //                 url: '/user/notification',
+  //                 icon: 'notifications'
+  //               },
+  //             ]
+  //           },
+  //         ]
+  //       },
+  //       {
+  //         title: 'Profile',
+  //         url: '/user/profile',
+  //         icon: 'person'
+  //       }
+  //     ]
+  //   },
+  //   {
+  //     sectionName: 'ACCOUNT',
+  //     showAfterLogin: true,
+  //     sectionItems: [
+  //       {
+  //         title: 'Profile',
+  //         url: '/profile',
+  //         icon: 'person'
+  //       }
+  //     ]
+  //   },
+  // ];
   
   constructor(
     public navCtrl: NavController,
@@ -40,6 +141,43 @@ export class ProductlistPage {
 
   ionViewDidLoad() {
     this.getHeaderData();
+    this.productList();
+  }
+
+  productList()
+  {
+    var data = {
+      "product_id":""
+    } 
+    this.sp.getProductList(data).subscribe(
+      res => {
+        console.log(res);
+        if (res['status']) {
+          this.allProduct = res['result']['data'];
+        //   this.allProduct.forEach((item, index) => {
+        //     console.log(item);
+        //     if(item.types.length >0 ) {
+               
+        //     }
+        // });
+        this.allProduct.forEach((x, i) => {
+            this.allProduct[i].state = "close";
+        })
+        console.log(this.allProduct);
+        }
+      },
+      error => {
+      }
+    )
+
+  }
+
+  expandClose(event, navItem) {
+    navItem.state = (navItem.state === 'open') ? 'close' : 'open';
+  }
+
+  gotoProDetails() {
+    this.navCtrl.push("EnquirePage");
   }
 
   getHeaderData() {

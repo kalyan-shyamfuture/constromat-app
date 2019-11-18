@@ -4,14 +4,127 @@
    See http://ionicframework.com/docs/components/#navigation for more info on
    Ionic pages and navigation.
    -->
-   <!-- <ion-header>
+<!-- <ion-header>
     <ion-navbar>
        <ion-title></ion-title>
     </ion-navbar>
  </ion-header> -->
- <ion-content class="productlist-page" >
-  <h3>Product page </h3>
- </ion-content>
- <ion-footer>
-    <page-footer></page-footer>
- </ion-footer>
+<ion-content class="productlist-page">
+  <!-- <ng-container *ngFor="let product of allProduct; let i = index">
+    <ion-list lines  *ngIf="!product.types?.length; else hasSubmenuBlock">
+        <ion-list-header>
+            {{product.product_name}}
+            <ion-icon item-end ios="ios-arrow-down" md="md-arrow-down"></ion-icon>
+          </ion-list-header>
+    </ion-list>
+  
+  </ng-container> -->
+
+
+
+
+  <!-- Main Item -->
+  <ng-container *ngFor="let product of allProduct; let i = index">
+    <!-- Menu link -->
+    <!-- <button ion-button *ngIf="!product.types?.length; else hasSubmenuBlock"> -->
+        <ion-list lines  *ngIf="!product.types?.length; else hasSubmenuBlock">
+      <ion-item>
+        <ion-label>
+          {{product.product_name}}
+        </ion-label>
+      </ion-item>
+    </ion-list>
+    <!-- </button> -->
+    <!-- /Menu link -->
+    <!-- With Submenu -->
+    <ng-template #hasSubmenuBlock>
+      <!-- Menu link -->
+      <!-- <button ion-button> -->
+        <ion-list>
+        <ion-item>
+          <ion-label (click)="gotoProDetails()">
+            {{product.product_name}}
+          </ion-label>
+          <ion-icon item-end ios="ios-arrow-down" md="md-arrow-down" slot="end" (click)="expandClose($event, product)"></ion-icon>
+        </ion-item>
+
+        <!-- <ion-icon name="add" slot="end" (click)="expandClose($event, product)"></ion-icon> -->
+      </ion-list>
+      <!-- </button> -->
+      <!-- /Menu link -->
+      <!-- Sub menus -->
+      <ng-container *ngIf="product.types?.length">
+        <ion-list class="sub-menu" [@expandCollapse]="product.state">
+          <ng-container *ngFor="let protypes of product.types; let i = index">
+            <!-- Sub Menu link -->
+            <!-- <button ion-button *ngIf="!protypes.types?.length; else subSubmenuBlock"> -->
+              <ion-list *ngIf="!protypes.types?.length; else subSubmenuBlock">
+              <ion-item>
+                <ion-icon slot="start" [name]="protypes.icon"></ion-icon>
+                <ion-label (click)="gotoProDetails()">
+                  {{protypes.type_name}}
+                </ion-label>
+              </ion-item>
+              </ion-list>
+            <!-- </button> -->
+            <!-- /Sub Menu link -->
+          </ng-container>
+        </ion-list>
+      </ng-container>
+      <!-- /Sub menus -->
+    </ng-template>
+    <!-- /With Submenu -->
+  </ng-container>
+  <!-- /Main Item -->
+
+
+
+
+
+   <!-- <ng-container *ngFor="let product of allProduct; let i = index">
+
+      <button ion-button *ngIf="!product.types?.length; else hasSubmenuBlock">
+        <ion-item>
+          <ion-label>
+            {{product.product_name}}
+          </ion-label>
+        </ion-item>
+      </button>
+  
+      <ng-template #hasSubmenuBlock>
+   
+        <button ion-button>
+          <ion-item>
+            <ion-label>
+              {{product.product_name}}
+            </ion-label>
+          </ion-item>
+          <ion-icon name="add" slot="end" (click)="expandClose($event, product)"></ion-icon>
+        </button>
+ 
+        <ng-container *ngIf="product.types?.length">
+          <ion-list class="sub-menu" [@expandCollapse]="product.state">
+            <ng-container *ngFor="let protypes of product.types; let i = index">
+              <button ion-button *ngIf="!protypes.types?.length; else subSubmenuBlock">
+                <ion-item>
+                  <ion-icon slot="start" [name]="protypes.icon"></ion-icon>
+                  <ion-label>
+                    {{protypes.type_name}}
+                  </ion-label>
+                </ion-item>
+              </button>
+            </ng-container>
+          </ion-list>
+        </ng-container>
+      </ng-template>
+    </ng-container> -->
+
+
+
+
+
+
+</ion-content>
+<ion-footer>
+  <page-footer></page-footer>
+</ion-footer>

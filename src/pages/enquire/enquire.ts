@@ -89,20 +89,30 @@ export class EnquirePage {
 
 
 
-  signIn() {
+  addEnquiry() {
     if (this.enquireForm.valid) {
-      this.enquireForm.value.user_type ="2";
-     this.sp.userLogin(this.enquireForm.value).subscribe(
+      console.log(this.enquireForm.value);
+     //this.enquireForm.value.enquiry_type ="home";
+     let formData = new FormData();
+      formData.append('enquiry_type' ,'home');
+      formData.append('user_name' , this.enquireForm.value.user_name);
+      formData.append('user_phone' , this.enquireForm.value.user_phone);
+      formData.append('user_email' , this.enquireForm.value.user_email);
+      formData.append('user_org_type' , this.enquireForm.value.user_org_type);
+      formData.append('user_delivery_location' , this.enquireForm.value.user_delivery_location);
+      formData.append('user_quote' , this.enquireForm.value.user_quote);
+      formData.append('user_product' , this.enquireForm.value.user_product);
+      formData.append('user_project_qty' , this.enquireForm.value.user_project_qty);
+      formData.append('user_project_unit' , this.enquireForm.value.user_project_unit);
+     this.sp.addEnquiry(formData).subscribe(
       res => { 
+        console.log("Add Enquiry Success==>",res);
         if(res['result'].status) {
-          console.log(res['result']['detail']);
-            localStorage.setItem('logged_user_name', res['result']['detail']['name']);
-            localStorage.setItem('logged_user_email', res['result']['detail']['email']);
-            localStorage.setItem('logged_user_contact_no', res['result']['detail']['phone']);
-            localStorage.setItem('logged_user_id', res['result']['detail']['id']);
-            localStorage.setItem('isLoggedin', 'true')
-            this.sp.loginStatus(true);
-               this.navCtrl.setRoot('HomePage');
+          this.enquireForm.reset();
+          this.presentToast(res['result'].message);
+        }
+        else {
+          this.presentToast(res['result'].message);
         }
       },
       error => {

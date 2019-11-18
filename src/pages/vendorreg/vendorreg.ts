@@ -18,7 +18,10 @@ import { ServicesProvider } from '../../core/services/services';
   templateUrl: 'vendorreg.html',
 })
 export class VendorregPage {
-  public impDocument: any;
+  public panDocument: any;
+  public aadharDocument: any;
+  public gstDocument: any;
+  public tradeDocument: any;
   public addDocument: any;
   vendorForm: FormGroup;
   countryList: any = [];
@@ -55,11 +58,7 @@ export class VendorregPage {
     { id: 8, type: "Contractors" },
     { id: 9, type: "Others" }
   ]
-  product: any = [
-    { id: 1, name: "Test1" },
-    { id: 2, name: "Test2" },
-    { id: 3, name: "Test3" },
-  ]
+
   constructor(
     public navCtrl: NavController,
     public navParams: NavParams,
@@ -70,6 +69,7 @@ export class VendorregPage {
     public menuCtrl: MenuController,
     public sp: ServicesProvider,
   ) {
+
 
 
     this.vendorForm = this.formBuilder.group({
@@ -91,7 +91,10 @@ export class VendorregPage {
       address2: ['', Validators.required],
       landmark: ['', Validators.required],
       pin_code: ['', Validators.required],
-      imp_doc: ['', Validators.required],
+      pan_doc: ['', Validators.required],
+      aadhar_doc: ['', Validators.required],
+      trade_doc: ['', Validators.required],
+      gst_doc: ['', Validators.required],
       add_doc: ['', Validators.required],
 
     });
@@ -112,7 +115,7 @@ export class VendorregPage {
   getCountryList() {
     this.sp.getCountryList().subscribe(
       res => {
-        console.log(res);
+       // console.log(res);
         if (res['status']) {
           this.countryList = res['result']
         }
@@ -158,7 +161,7 @@ export class VendorregPage {
     } 
     this.sp.getProductList(data).subscribe(
       res => {
-        console.log(res);
+        //console.log(res);
         if (res['status']) {
           this.allProduct = res['result']['data'];
         }
@@ -182,7 +185,7 @@ export class VendorregPage {
       formData.append('pan_no' , this.vendorForm.value.pan_no);
       formData.append('turnover' , this.vendorForm.value.turnover);
       formData.append('product' , this.vendorForm.value.product);
-      formData.append('mobile' , this.vendorForm.value.mobile);
+      formData.append('phone' , this.vendorForm.value.mobile);
       formData.append('email' , this.vendorForm.value.email);
       formData.append('country' , this.vendorForm.value.namcountrye);
       formData.append('state' , this.vendorForm.value.state);
@@ -191,8 +194,12 @@ export class VendorregPage {
       formData.append('address2' , this.vendorForm.value.address2);
       formData.append('landmark' , this.vendorForm.value.landmark);
       formData.append('pin_code' , this.vendorForm.value.pin_code);
-      formData.append('imp_doc' , this.impDocument);
+      formData.append('pan_doc' , this.panDocument);
+      formData.append('aadhar_doc' , this.aadharDocument);
+      formData.append('trade_doc' , this.tradeDocument);
+      formData.append('gst_doc' , this.gstDocument);
       formData.append('add_doc' , this.addDocument);
+
       formData.append('user_type' , '3');
       this.vendorForm.value.user_type = "3";
       this.sp.vendorContact(formData).subscribe(
@@ -254,13 +261,35 @@ export class VendorregPage {
     );
   }
 
-  impDoc(event) {
+  panDoc(event) {
     if (event.target.files.length) {
-      this.impDocument = event.target.files[0];
+      this.panDocument = event.target.files[0];
+      console.log(event.target.files[0]);
+
+    }
+  }
+
+  aadharDoc(event) {
+    if (event.target.files.length) {
+      this.aadharDocument = event.target.files[0];
       console.log(event.target.files[0]);
     }
+  }
+ 
+  tradeDoc(event) {
+    if (event.target.files.length) {
+      this.tradeDocument = event.target.files[0];
+      console.log(event.target.files[0]);
 
+    }
+  }
 
+  gstDoc(event) {
+    if (event.target.files.length) {
+      this.gstDocument = event.target.files[0];
+      console.log(event.target.files[0]);
+
+    }
   }
 
   addDoc(event) {
